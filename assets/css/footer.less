@@ -1,0 +1,72 @@
+// out: false
+@import 'base.less';
+footer {
+  background-color: @blue;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  .contact-info {
+    display: none;
+  }
+  .icp {
+    padding: 20px;
+    dl {
+      margin-bottom: 0;
+      dd {
+        margin: 0;
+      }
+    }
+  }
+  @media (min-width: 992px) {
+    min-height: 200px;
+    background-image: url('~assets/imgs/yedi.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+    .contact-info {
+      display: block;
+      flex-grow: 1;
+      width: 100%;
+      padding: 20px;
+      border-bottom: 1px solid @light-blue;
+      ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        li {
+          padding: 20px 40px;
+          width: 30%;
+          font-size: 14px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          &:not(:last-child) {
+            border-right: 1px solid @light-blue;
+          }
+        }
+      }
+    }
+    .icp {
+      padding: 20px;
+      dl {
+        margin-bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        text-align: center;
+        dt {
+          width: 100%;
+        }
+        dd {
+          padding: 12px;
+          margin: 0 10px;
+        }
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-# blue-green
+# blue
 
 > Design by Ednet.cn
 

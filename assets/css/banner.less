@@ -33,23 +33,63 @@
       width: (960/450) * 100% !important;
       transform: translate(-50%, -50%);
       @media (min-width: 768px) {
-        max-width: 100%;
         width: 100% !important;
+        max-width: 100%;
       }
     }
     @media (min-width: 768px) {
       padding-bottom: (450/1920) * 100%;
     }
   }
-  .swiper-button-prev {
-    left: 0;
-    background: url(~assets/imgs/left.png) center center no-repeat;
-    background-size: 100% 100%;
+  // 前后按钮
+  .swiper-prev,
+  .swiper-next {
+    display: none;
+    z-index: 10;
+    position: absolute;
+    top: 50%;
+    width: 2.4rem;
+    height: 2.4rem;
+    @media (min-width: 768px) {
+      display: block;
+    }
   }
-  .swiper-button-next {
+  .swiper-prev {
+    left: 0;
+    transform: rotate(-45deg) translateY(-50%);
+    border-top: 0.3rem solid var(--color-fifth);
+    border-left: 0.3rem solid var(--color-fifth);
+    @media (min-width: 768px) {
+      left: 10%;
+    }
+  }
+
+  .swiper-next {
     right: 0;
-    background: url(~assets/imgs/right.png) center center no-repeat;
-    background-size: 100% 100%;
+    transform: rotate(45deg) translateY(-50%);
+    border-top: 0.3rem solid var(--color-fifth);
+    border-right: 0.3rem solid var(--color-fifth);
+    @media (min-width: 768px) {
+      right: 10%;
+    }
+  }
+  .swiper-button-disabled {
+    opacity: 0.5;
+  }
+  // 页面指示按钮
+  .swiper-pagination-bullet {
+    width: 2rem;
+    height: 0.25rem;
+    border-radius: 1.5rem;
+    opacity: 0.5;
+    background: var(--color-secondary);
+    @media (min-width: 768px) {
+      width: 6rem;
+    }
+  }
+  .swiper-pagination-bullet-active {
+    opacity: 1;
+    background: var(--color-primary);
   }
   .carousel {
     height: 0;
@@ -89,12 +129,6 @@
     }
   }
   @media (min-width: 768px) {
-    .swiper-button-prev {
-      left: 10%;
-    }
-    .swiper-button-next {
-      right: 10%;
-    }
     h2 {
       font-size: 300%;
     }

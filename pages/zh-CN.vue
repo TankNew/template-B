@@ -1,51 +1,77 @@
 <template>
   <div class="body-container">
+    <!-- 头部 -->
     <header>
+      <!-- 移动端 -->
       <div class="fixed-bar">
-        <div class="tel">
-          <i class="fas fa-phone-alt mr-1"></i>
-          {{ companyInfo.tel }}
-        </div>
-        <div @click="changeLanguage">
-          <a class="green-btn">中/EN</a>
+        <div class="container">
+          <div class="tel">
+            {{ $L('Tel') }}:
+            {{ companyInfo.tel }}
+          </div>
+          <div
+            class="welcome"
+          >{{ $L('Welcometo') + companyInfo.appName + $L('officialwebsite') }}!</div>
+          <div class="lang-bar-mobile">
+            <a @click="changeLanguage('en')" class="lang-switch-btn">中/EN</a>
+          </div>
+          <div class="lang-bar-pc">
+            <a
+              :class="language=='zh-CN'?'disabled':''"
+              @click="changeLanguage('zh-CN')"
+            >中文</a>|
+            <a
+              :class="language=='en'?'disabled':''"
+              @click="changeLanguage('en')"
+            >English</a>
+            <span class="toolbar-weixin">
+              <i class="fab fa-weixin"></i>
+            </span>
+          </div>
         </div>
       </div>
-      <div class="header-title container">
-        <div class="logo">
-          <img :src="companyInfo.logo" />
+      <div class="header-container">
+        <!-- 网页端 -->
+        <div class="header-title">
+          <div class="logo">
+            <img :src="companyInfo.logo" />
+          </div>
+          <div class="company-name">{{ companyInfo.appName }}</div>
         </div>
-        <div class="company-name">{{ companyInfo.appName }}</div>
-        <div @click="changeLanguage" class="toolbar">
-          <a>中/EN</a>
+        <!-- 导航 -->
+        <div class="navbar-container">
+          <b-navbar toggleable="lg" type="blue" variant="blue">
+            <b-navbar-brand>{{ title }}</b-navbar-brand>
+            <b-navbar-toggle target="nav-collapse">
+              <i class="fas fa-align-justify"></i>
+            </b-navbar-toggle>
+            <b-collapse id="nav-collapse" is-nav>
+              <b-navbar-nav>
+                <section v-for="item in navbars" :key="item.id">
+                  <b-nav-item-dropdown
+                    v-if="item.children&&item.children.length>0"
+                    :class="[currentPath.code&&currentPath.code.includes(item.code)?'active':'']"
+                    :text="$L(item.displayName)"
+                  >
+                    <b-dropdown-item
+                      v-for="ditem in item.children"
+                      :key="ditem.id"
+                      :to="ditem.url"
+                    >{{ $L(ditem.displayName) }}</b-dropdown-item>
+                  </b-nav-item-dropdown>
+                  <b-nav-item
+                    v-else
+                    :class="[currentPath.code&&currentPath.code.includes(item.code)?'active':'']"
+                    :to="item.url"
+                  >{{ $L(item.displayName) }}</b-nav-item>
+                </section>
+              </b-navbar-nav>
+            </b-collapse>
+          </b-navbar>
         </div>
       </div>
-      <b-navbar toggleable="lg" type="blue" variant="blue">
-        <b-navbar-brand>{{ title }}</b-navbar-brand>
-        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-        <b-collapse id="nav-collapse" is-nav>
-          <b-navbar-nav>
-            <section v-for="item in navbars" :key="item.id">
-              <b-nav-item-dropdown
-                v-if="item.children&&item.children.length>0"
-                :class="[currentPath.code&&currentPath.code.includes(item.code)?'active':'']"
-                :text="$L(item.displayName)"
-              >
-                <b-dropdown-item
-                  v-for="ditem in item.children"
-                  :key="ditem.id"
-                  :to="ditem.url"
-                >{{ $L(ditem.displayName) }}</b-dropdown-item>
-              </b-nav-item-dropdown>
-              <b-nav-item
-                v-else
-                :class="[currentPath.code&&currentPath.code.includes(item.code)?'active':'']"
-                :to="item.url"
-              >{{ $L(item.displayName) }}</b-nav-item>
-            </section>
-          </b-navbar-nav>
-        </b-collapse>
-      </b-navbar>
     </header>
+    <!-- banner -->
     <section :class="['banner',currentPath.navbarType!==5?'sub':'']">
       <client-only>
         <div v-swiper:mySwiper="swiperOption">
@@ -64,8 +90,8 @@
               </div>
             </div>
           </div>
-          <div slot="button-prev" class="swiper-button-prev"></div>
-          <div slot="button-next" class="swiper-button-next"></div>
+          <div slot="button-prev" class="swiper-prev"></div>
+          <div slot="button-next" class="swiper-next"></div>
           <div class="swiper-pagination"></div>
         </div>
       </client-only>
@@ -78,37 +104,38 @@
     </section>
     <footer>
       <div class="contact-info container">
-        <ul>
-          <li>
-            <i class="fas fa-map-marked-alt mr-2 fa-1x"></i>
-            <div>
-              <span>{{ Address }}:</span>
-              <span class="val">{{ companyInfo.appAddress }}</span>
-            </div>
-          </li>
-          <li>
-            <i class="fas fa-phone-alt mr-2 fa-1x"></i>
-            <div>
-              <span>{{ Tel }}:</span>
-              <span class="val">{{ companyInfo.tel }}</span>
-            </div>
-          </li>
-
-          <li>
-            <i class="fas fa-envelope mr-2 fa-1x"></i>
-            <div>
-              <span>{{ Email }}:</span>
-              <span class="val">{{ companyInfo.email }}</span>
-            </div>
-          </li>
-        </ul>
+        <div class="contact-info-company">
+          <div class="logo">
+            <img :src="companyInfo.logo" />
+          </div>
+          <div class="company-name">{{ companyInfo.appName }}</div>
+        </div>
+        <div class="contact-info-contact">
+          <div class="email">
+            <span>{{ Email }}:</span>
+            {{ companyInfo.email }}
+          </div>
+          <div class="tel">
+            <span>{{ Tel }}:</span>
+            {{ companyInfo.tel }}
+          </div>
+          <div class="address">
+            <span>{{ Address }}:</span>
+            {{ companyInfo.appAddress }}
+          </div>
+        </div>
       </div>
       <div class="container icp">
         <dl>
-          <dt>{{ companyInfo.appName }}</dt>
+          <dt>
+            Copyright
+            <i class="far fa-copyright"></i>
+            2019-{{ year }}
+            {{ companyInfo.appName }}
+          </dt>
           <dd v-for="item in companyInfo.icps">
             <a
-              class="gongan white"
+              class="gongan secondary"
               target="_blank"
               href="http://beian.miit.gov.cn/publish/query/indexFirst.action"
             >
@@ -118,7 +145,7 @@
           <dd v-for="item in companyInfo.gongAns">
             <a
               :href="`http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=${item}`"
-              class="gongan white"
+              class="gongan secondary"
               target="_blank"
             >
               <img src="@/assets/imgs/gongan.png" />
@@ -129,7 +156,7 @@
             技术支持：
             <a
               href="https://www.ednet.cn"
-              class="white"
+              class="secondary"
               target="_blank"
             >e德互联</a>
           </dd>
@@ -155,6 +182,7 @@ export default {
   data() {
     return {
       slide: 0,
+      year: new Date().getFullYear(),
       sliding: null,
       isWeixinShow: false,
       swiperOption: {
@@ -162,8 +190,8 @@ export default {
           el: '.swiper-pagination'
         },
         navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev'
+          nextEl: '.swiper-next',
+          prevEl: '.swiper-prev'
         },
         autoHeight: true,
         on: {
@@ -215,15 +243,14 @@ export default {
     context.store.commit('app/setCulture', language)
     await context.store.dispatch('app/getCompanyInfo')
     await context.store.dispatch('app/getNavbars')
-    return { name: 'Main', userAgent: context.userAgent }
+    return { name: 'Main', userAgent: context.userAgent, language }
   },
   created() {
     this.setcurrentPath({ path: this.$route.path })
   },
   mounted() {},
   methods: {
-    changeLanguage() {
-      let lang = `en`
+    changeLanguage(lang) {
       window.location.href = '/' + lang + '/home'
     },
     ...mapActions({ setcurrentPath: 'app/setcurrentPath' }),

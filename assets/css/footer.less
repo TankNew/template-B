@@ -1,56 +1,73 @@
 // out: false
 @import 'base.less';
 footer {
-  background-color: @blue;
-  color: white;
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
+  line-height: 2.6rem;
   .contact-info {
-    display: none;
+    padding: 2rem;
+    border-bottom: 1px solid rgba(var(--color-fourth-rgb), 0.2);
+    .contact-info-company {
+      display: none;
+    }
+    .contact-info-contact {
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: column;
+      align-items: flex-start;
+      span {
+        margin-right: 0.2rem;
+      }
+    }
   }
   .icp {
-    padding: 20px;
+    padding: 2rem;
     dl {
       margin-bottom: 0;
+      dt {
+        font-weight: normal;
+      }
       dd {
         margin: 0;
       }
     }
   }
   @media (min-width: 992px) {
-    min-height: 200px;
-    background-image: url('~assets/imgs/yedi.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: bottom;
     .contact-info {
-      display: block;
-      flex-grow: 1;
+      display: flex;
       width: 100%;
-      padding: 20px;
-      border-bottom: 1px solid @light-blue;
-      ul {
-        display: flex;
-        justify-content: center;
+      .contact-info-company {
+        display: block;
+        width: 40%;
+        .logo > img {
+          height: 3rem;
+        }
+        .company-name {
+          font-weight: bold;
+        }
+      }
+      .contact-info-contact {
+        width: 60%;
         align-items: center;
         flex-direction: row;
-        li {
-          padding: 20px 40px;
-          width: 30%;
-          font-size: 14px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          &:not(:last-child) {
-            border-right: 1px solid @light-blue;
-          }
+        flex-wrap: wrap;
+        border-bottom: none;
+        .email {
+          width: 50%;
+        }
+        .tel {
+          width: 50%;
+        }
+        .address {
+          width: 100%;
         }
       }
     }
     .icp {
-      padding: 20px;
       dl {
         margin-bottom: 0;
         display: flex;
@@ -63,8 +80,8 @@ footer {
           width: 100%;
         }
         dd {
-          padding: 12px;
-          margin: 0 10px;
+          padding: 1rem;
+          margin: 0 1rem;
         }
       }
     }

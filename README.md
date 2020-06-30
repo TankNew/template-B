@@ -1,4 +1,4 @@
-# blue
+# templateB
 
 > Design by Ednet.cn
 

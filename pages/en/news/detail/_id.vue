@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <h4 class="page-title">
-      <i class="fas fa-bookmark" />
       <span>{{ catalogItem.title }}</span>
     </h4>
     <h6 class="page-sub-title">{{ formatDate(catalogItem.creationTime) }}</h6>
@@ -31,8 +30,27 @@
           <div slot="button-prev" class="swiper-button-prev"></div>
           <div slot="button-next" class="swiper-button-next"></div>
         </div>
-        <div v-html="catalogItem.content" class="content"></div>
+        <div v-html="catalogItem.content"></div>
       </div>
+      <section class="page-content-announce">
+        <client-only>
+          <div v-swiper:mySwiper="swiperOption">
+            <div class="swiper-wrapper position-relative">
+              <div
+                v-for="(item, index) in annouces"
+                :key="index"
+                @click="target(item.id)"
+                class="swiper-slide"
+              >
+                <img :src="item.cover" />
+                <div class="slide-info">
+                  <a>{{ item.title }}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </client-only>
+      </section>
     </div>
   </div>
 </template>
@@ -88,12 +106,19 @@ export default {
         path += 'product/' + catalogItem.catalogGroup.id
         break
     }
-    return { catalogItem, path }
+    const annoucesParams = {
+      params: {
+        SkipCount: 0,
+        MaxResultCount: 10
+      }
+    }
+    const annouces = (await store.dispatch('app/getAnounces', annoucesParams)).items
+    return { catalogItem, path, annouces }
   },
   created() {
     this.$store.dispatch('app/setcurrentPath', {
       path: this.path,
-      code: this.catalogItem.catalogGroup.code
+      grandId: this.catalogItem.catalogGroup.id
     })
   },
   mounted() {
@@ -101,6 +126,9 @@ export default {
     // this.mySwiper.slideTo(3, 1000, false)
   },
   methods: {
+    target(id) {
+      window.open(`/${this.culture}/annouce/detail/` + String(id, '_blank'))
+    },
     formatDate(val) {
       return tools.date(val)
     }

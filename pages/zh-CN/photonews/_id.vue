@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h4 class="page-title">
-      <span>{{ currentPathParent!==null?currentPathParent.displayName:currentPath.displayName }}</span>
+      <span class="name">{{ currentPath.displayName }}</span>
     </h4>
     <div v-if="currentPathParent!==null" class="page-inside-nav">
       <dl>

@@ -1,142 +1,102 @@
 <template>
   <section class="home">
-    <div class="word-group-1">
-      <ul>
-        <li
-          v-for="(item,index) in firstGroup.children"
-          :key="item.id"
-          :class="index===wordIndex?'active':''"
-          :style="'animation-delay:'+index*0.5+'s;'"
-          @click="wordIndex=index"
-        >
-          <div class="word-group-1-info-container">
-            <div class="word-group-1-info">
-              <div class="info">
-                <h3>{{ item.displayName }}</h3>
-                <p>{{ item.info }}</p>
+    <section class="container">
+      <h3 class="page-title">
+        <span class="name">{{ $L('Announce') }}</span>
+      </h3>
+      <section class="announce">
+        <client-only>
+          <div v-swiper:mySwiper="swiperOption">
+            <div class="swiper-wrapper position-relative">
+              <div
+                v-for="(item, index) in annouces"
+                :key="index"
+                @click="target(item.id)"
+                class="swiper-slide"
+              >
+                <img :src="item.cover" />
+                <div class="slide-info">
+                  <a>{{ item.title }}</a>
+                </div>
               </div>
-              <a
-                @click="goNewsGroup(item.id,1)"
-                class="green-btn white px-5 py-2"
-              >{{ $L(`More`) }}</a>
-            </div>
-            <div class="word-group-1-cover">
-              <img :src="item.cover" class="cover" />
-              <h3>
-                <span>{{ item.displayName }}</span>
-              </h3>
             </div>
           </div>
-          <div @click="goNewsGroup(item.id,1)" class="word-group-1-icon">
-            <img :src="item.icon" class="icon" />
-            <span>{{ item.displayName }}</span>
+        </client-only>
+      </section>
+    </section>
+    <section class="container product-list">
+      <h3 class="page-title">
+        <span class="name">{{ productGroup1.displayName }}</span>
+        <span class="more">
+          <a
+            @click="goNewsGroup(productGroup1.id,3)"
+            href="javascript:void(0)"
+          >{{ $L('More') }} ></a>
+        </span>
+      </h3>
+      <ul>
+        <li v-for="item in productGroup1Items" @click="goNewsDetail(item.id,3)">
+          <div class="product-container">
+            <div class="product-cover">
+              <img :src="item.cover" />
+            </div>
+            <div class="product-info">
+              <h3 class="product-title">{{ item.title }}</h3>
+              <p v-html="filter(item.content,40)" class="product-content"></p>
+            </div>
           </div>
         </li>
       </ul>
-    </div>
-    <div class="product-group-1">
-      <h5 class="container">
-        <i class="fas fa-bookmark" />
-        {{ productGroup1.displayName }}
-      </h5>
-      <dl ref="postion" class="product-sub-group">
-        <dd v-for="(item,index) in productGroup1.children">
-          <div>
-            <a
-              @click="goNewsGroup(item.id,3)"
-              class="icon"
-              href="javascript:void(0)"
-            >
-              <img :src="item.icon" />
-            </a>
-            <a
-              @mouseenter="mouseenter($event,item,index)"
-              @mouseout="mouseout"
-              @click="mouseClick($event,item,index)"
-              href="javascript:void(0)"
-            >{{ item.displayName }}</a>
+    </section>
+    <section class="about">
+      <section class="container">
+        <h3 class="page-title">
+          <span class="name">{{ ad1.title }}</span>
+        </h3>
+        <div class="home-ad-1">
+          <div class="ad-content">
+            <p class="ad-text">{{ ad1.text }}</p>
+            <div class="ad-links">
+              <a
+                :href="ad1.url?ad1.url:'/'"
+                class="button-primary"
+              >{{ $L(`More`) }} ></a>
+              <a
+                :href="'/'+culture+'/contactus'"
+                class="button-primary"
+              >{{ $L(`ContactUs`) }} ></a>
+            </div>
           </div>
-        </dd>
-      </dl>
-      <h3 class="container">
-        <span :style="`left:${productSliderPositon}px`"></span>
-      </h3>
-      <div class="container">
-        <div class="product-list">
-          <ul ref="productList">
-            <li
-              v-for="item in productGroup1Items"
-              @click="goNewsDetail(item.id,3)"
-            >
-              <div class="product-cover">
-                <img :src="item.cover" />
-              </div>
-              <span class="product-title">{{ item.title }}</span>
-            </li>
-          </ul>
+          <div class="ad-img">
+            <img ref="adImg" :src="ad1.img" />
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="home-ad-1">
-        <div class="ad-img">
-          <img ref="adImg" :src="ad1.img" />
-        </div>
-        <div class="ad-content">
-          <h3 class="ad-title">{{ ad1.title }}</h3>
-          <p class="ad-text">{{ ad1.text }}</p>
-          <a
-            :href="ad1.url?ad1.url:'/'"
-            class="green-btn white ml-2 px-5 py-2"
-          >{{ $L(`More`) }}</a>
-        </div>
-      </div>
-    </div>
-    <div ref="partners" class="partner">
-      <div class="container">
-        <h3>{{ $L(`Partner`) }}</h3>
-        <dl>
-          <dd
-            v-for="(item,index) in partners.items"
-            :key="item.id"
-            :style="'animation-delay:'+index*0.5+'s;'"
-          >
-            <a :href="item.url" target="_blank">
-              <img :src="item.logo" />
-              <span>{{ item.title }}</span>
-            </a>
-          </dd>
-        </dl>
-      </div>
-    </div>
+      </section>
+    </section>
   </section>
 </template>
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 import tools from '../../utiltools/tools'
+import AppConsts from '../../utiltools/appconst'
 export default {
   data() {
     return {
       wordIndex: 0,
       observer: null,
       ad1: {},
-      firstGroup: {},
+      annouces: [],
       productGroup1: {},
       productGroup1Items: [],
       isProductLoading: false,
-      productSliderIndex: -1,
-      productSliderPositon: -10000,
-      productSliderPositonOffsetLeft: 0
+      swiperOption: {
+        direction: 'vertical',
+        autoHeight: true,
+        autoplay: true
+      }
     }
   },
   computed: {
-    options() {
-      return {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-      }
-    },
     ...mapState({
       currentPath: state => state.app.currentPath,
       culture: state => state.app.culture,
@@ -149,56 +109,21 @@ export default {
   },
   /**存放异步方法 */
   created() {
-    this.loadFirstGroup()
+    this.loadAnnouce()
     this.loadAd1()
     this.loadProductGroup1()
   },
   mounted() {
     this.loadProductGroup1Chilidren()
-    this.prodcutObserver = new IntersectionObserver(([{ isIntersecting }]) => {
-      if (isIntersecting) {
-        this.loadProductGroup1Items()
-        this.$refs.productList.classList.add('fancy')
-        this.prodcutObserver.unobserve(this.$refs.productList)
-      }
-    }, this.options)
-    this.prodcutObserver.observe(this.$refs.productList)
-
-    this.observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.intersectionRatio > 0) {
-          const param = {
-            params: {
-              IsActive: true,
-              SkipCount: 0,
-              MaxResultCount: 8
-            }
-          }
-          this.$store.dispatch('app/getPartner', param)
-          entry.target.classList.add('fancy')
-          this.observer.unobserve(entry.target)
-        }
-      })
-    })
-    this.observer.observe(this.$refs.partners)
-    this.observer.observe(this.$refs.adImg)
+    this.loadProductGroup1Items()
   },
   methods: {
-    mouseenter(e, item, index) {
-      const x = e.x
-      const y = e.y
-      this.productSliderPositon = this.productSliderPositonOffsetLeft + index * e.target.offsetWidth
+    target(id) {
+       window.open(`/${this.culture}/annouce/detail/` + String(id, '_blank'))
     },
-    mouseClick(e, item, index) {
-      if (!this.isProductLoading) {
-        this.productSliderIndex = index
-        this.loadProductGroup1SubGroupItems(item)
-      }
-    },
-    mouseout(e) {
-      if (this.productSliderIndex > -1)
-        this.productSliderPositon = this.productSliderPositonOffsetLeft + this.productSliderIndex * e.target.offsetWidth
-      else this.productSliderPositon = -100000
+    getImgUrl(val) {
+      if (val) return AppConsts.remoteServiceBaseUrl + val
+      else return null
     },
     goNewsGroup(id, type) {
       switch (type) {
@@ -231,13 +156,15 @@ export default {
     filter(val, length) {
       return tools.cutString(tools._filter(val), length)
     },
-    async loadFirstGroup() {
-      const Groups = this.homePage.groups.filter(x => x.catalogGroup && x.catalogGroup.catalogType === 1)
-      if (Groups.length > 0) {
-        this.firstGroup = Groups[0].catalogGroup
-        const res = await this.$store.dispatch('app/getCatalogGroupList', { params: { id: this.firstGroup.id } })
-        this.firstGroup.children = res
+    async loadAnnouce() {
+      const params = {
+        params: {
+          SkipCount: 0,
+          MaxResultCount: 10
+        }
       }
+      const res = await this.$store.dispatch('app/getAnounces', params)
+      this.annouces = res.items
     },
     loadProductGroup1() {
       const Groups = this.$store.state.app.homePage.groups.filter(
@@ -267,16 +194,12 @@ export default {
           params: {
             CatalogGroupId: this.productGroup1.id,
             SkipCount: 0,
-            MaxResultCount: 10,
+            MaxResultCount: 6,
             Sorting: 'IsTop DESC, Number DESC'
           }
         }
         const res = await this.$store.dispatch('app/getCatalogList', params)
         this.productGroup1Items = res.items
-        this.$nextTick(() => {
-          this.productSliderPositonOffsetLeft =
-            (this.$refs.postion.offsetWidth / this.$refs.postion.children.length - 100) / 2
-        })
       }
       this.isProductLoading = false
     },

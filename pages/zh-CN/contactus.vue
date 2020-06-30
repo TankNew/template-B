@@ -1,38 +1,25 @@
 <template>
   <div class="container insider">
     <h4 class="page-title">
-      <i class="fas fa-bookmark" />
-      <span>{{ currentPath.displayName }}</span>
+      <span class="name">{{ currentPath.displayName }}</span>
     </h4>
     <div class="page-content">
       <div class="contactus">
-        <ul class="address">
+        <ul>
           <li>
-            <label>
-              <i class="fas fa-id-card"></i>
-              {{ $L(`CompanyName`) }}
-            </label>
+            <label>{{ $L(`CompanyName`) }}</label>
             {{ companyInfo.appName }}
           </li>
           <li>
-            <label>
-              <i class="fas fa-map-marker-alt"></i>
-              {{ $L(`Address`) }}
-            </label>
+            <label>{{ $L(`Address`) }}</label>
             {{ companyInfo.appAddress }}
           </li>
           <li>
-            <label>
-              <i class="fas fa-phone-volume"></i>
-              {{ $L(`Tel`) }}
-            </label>
+            <label>{{ $L(`Tel`) }}</label>
             {{ companyInfo.tel }}
           </li>
           <li>
-            <label>
-              <i class="fas fa-envelope"></i>
-              {{ $L(`Email`) }}
-            </label>
+            <label>{{ $L(`Email`) }}</label>
             {{ companyInfo.email }}
           </li>
         </ul>

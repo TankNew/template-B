@@ -1,0 +1,107 @@
+// out: false
+.product-inside-container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  .page-title,
+  .page-product-list {
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+  }
+  @media (min-width: 576px) {
+    max-width: 540px;
+  }
+
+  @media (min-width: 768px) {
+    max-width: 720px;
+  }
+
+  @media (min-width: 992px) {
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+    max-width: 960px;
+    .page-title,
+    .page-product-list {
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    max-width: 1140px;
+  }
+}
+.page-product-list {
+  margin-top: 2rem;
+  ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  li {
+    display: inline-block;
+    cursor: pointer;
+    width: calc(50% - 1.2rem);
+    overflow: hidden;
+    margin: 1rem 0.6rem;
+    @media (min-width: 768px) {
+      width: calc(33% - 4rem);
+      margin: 2rem;
+      padding: 1rem;
+    }
+    .cover {
+      display: block;
+      width: 100%;
+      height: 0;
+      padding-bottom: 75%;
+      overflow: hidden;
+      text-align: center;
+      position: relative;
+      > img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 100%;
+      }
+    }
+    .cover-info {
+      display: block;
+      width: 100%;
+      padding: 0.6rem 1rem;
+      .cover-title {
+        font-size: 1.6rem;
+        color: var(--color-primary);
+        font-weight: bold;
+        padding: 1rem 0;
+        display: block;
+        text-align: center;
+        overflow: hidden;
+        height: 3.6rem;
+      }
+      .cover-content {
+        display: none;
+        @media (min-width: 768px) {
+          display: block;
+          max-height: 3.5rem;
+          margin-bottom: 0;
+          overflow: hidden;
+        }
+      }
+    }
+    &:hover {
+      box-shadow: 0 0 0 0.1rem var(--color-secondary);
+    }
+  }
+}
+.product-detail-title {
+  padding: 2rem 0;
+  margin-bottom: 2rem;
+  text-align: center;
+  border-bottom: 2px solid var(--color-secondary);
+  .product-detail-date {
+    display: block;
+    margin-top: 1rem;
+  }
+}

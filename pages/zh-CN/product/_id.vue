@@ -1,26 +1,27 @@
 <template>
-  <div class="page-container insider">
+  <div class="product-inside-container insider">
     <h4 class="page-title">
-      <i class="fas fa-bookmark" />
-      <span>{{ currentPath.displayName }}</span>
+      <span class="name">{{ currentPath.displayName }}</span>
+      <div
+        v-if="currentPath.children&&currentPath.children.length>0&&!isRootGroup"
+        class="page-sub-mobile-select"
+      >
+        <a v-if="collapse" @click="collapse=!collapse">
+          分类
+          <i class="fas fa-angle-down"></i>
+        </a>
+        <a v-else @click="collapse=!collapse">
+          分类
+          <i class="fas fa-angle-up"></i>
+        </a>
+      </div>
     </h4>
     <section class="position-relative">
       <div
-        v-if="currentPath.children&&currentPath.children.length>0"
+        v-if="currentPath.children&&currentPath.children.length>0&&!isRootGroup"
         :class="['page-sub-groups',collapse?'':'expand']"
       >
-        <div class="mobile-bar">
-          <a v-if="collapse" @click="collapse=!collapse">
-            <i class="fas fa-angle-down"></i>
-            {{ $L(`Expand`) }}
-          </a>
-          <a v-else @click="collapse=!collapse">
-            <i class="fas fa-angle-up"></i>
-            {{ $L(`Collapse`) }}
-          </a>
-        </div>
         <div @click="collapse=true" class="table">
-          <div class="web-choose">{{ $L(`Choose`) }}</div>
           <div @click.stop.prevent class="list">
             <dl>
               <dd v-for="child in currentPath.children" :key="child.id">
@@ -31,49 +32,66 @@
               </dd>
             </dl>
           </div>
-          <div class="web-collapse">
-            <a v-if="collapse" @click.stop.prevent="collapse=!collapse">
-              {{ $L(`Expand`) }}
-              <i class="fas fa-angle-double-down ml-1"></i>
-            </a>
-            <a v-else @click="collapse=!collapse">
-              {{ $L(`Collapse`) }}
-              <i class="fas fa-angle-double-up ml-1"></i>
-            </a>
-          </div>
         </div>
       </div>
-      <div class="page-product-list">
-        <ul>
-          <li
-            v-for="item in pageContent.items"
-            :key="item.id"
-            @click="goNewsDetail(item.id,3)"
-          >
-            <span class="cover">
-              <img :src="item.cover" />
-            </span>
-            <span class="cover-title">
-              <a href="javascript:void(0)">{{ item.title }}</a>
-            </span>
-          </li>
-        </ul>
-      </div>
-      <div class="my-5">
-        <b-pagination
-          v-model="currentPage"
-          :per-page="perPage"
-          :total-rows="pageContent.totalCount"
-          @input="pageChange"
-          align="center"
-          pills
-        ></b-pagination>
-      </div>
+      <section v-if="isRootGroup">
+        <div class="page-product-list">
+          <ul>
+            <li
+              v-for="item in subGroups"
+              :key="item.id"
+              @click="goNewsGroup(item.id,3)"
+            >
+              <span class="cover">
+                <img :src="item.cover" />
+              </span>
+              <div class="cover-info">
+                <span class="cover-title">
+                  <a href="javascript:void(0)">{{ item.displayName }}</a>
+                </span>
+                <p v-html="filter(item.info,40)" class="cover-content"></p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section v-else>
+        <div class="page-product-list">
+          <ul>
+            <li
+              v-for="item in pageContent.items"
+              :key="item.id"
+              @click="goNewsDetail(item.id,3)"
+            >
+              <span class="cover">
+                <img :src="item.cover" />
+              </span>
+              <div class="cover-info">
+                <span class="cover-title">
+                  <a href="javascript:void(0)">{{ item.title }}</a>
+                </span>
+                <p v-html="filter(item.content,40)" class="cover-content"></p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="my-5">
+          <b-pagination
+            v-model="currentPage"
+            :per-page="perPage"
+            :total-rows="pageContent.totalCount"
+            @input="pageChange"
+            align="center"
+            pills
+          ></b-pagination>
+        </div>
+      </section>
     </section>
   </div>
 </template>
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
+import tools from '../../../utiltools/tools'
 const c = 1
 const p = 8
 export default {
@@ -89,7 +107,9 @@ export default {
       culture: state => state.app.culture,
       navbars: state => state.app.navbars,
       currentPath: state => state.app.currentPath,
-      currentPathParent: state => state.app.currentPathParent
+      currentPathParent: state => state.app.currentPathParent,
+      isRootGroup: state =>
+        state.app.currentPath.code.split('.').length - 1 === 1 && state.app.currentPath.children.length > 0
     })
   },
   validate({ params }) {
@@ -106,11 +126,15 @@ export default {
       }
     }
     const json = await store.dispatch('app/getCatalogList', param)
+    const subJson = await store.dispatch('app/getCatalogGroupList', { params: { id: route.params.id } })
 
-    return { pageContent: json }
+    return { pageContent: json, subGroups: subJson }
   },
   created() {},
   methods: {
+    filter(val, length) {
+      return tools.cutString(tools._filter(val), length)
+    },
     goNewsGroup(id, type) {
       switch (type) {
         case 1:

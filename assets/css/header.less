@@ -37,7 +37,7 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
-    padding: 10px;
+    padding: 1rem;
     color: var(--color-secondary);
     background-color: var(--color-primary);
     z-index: 99;
@@ -80,6 +80,32 @@ header {
       }
       @media (min-width: 992px) {
         display: inline-block;
+        position: relative;
+      }
+      .wexin-code {
+        position: absolute;
+        top: 3rem;
+        right: 0;
+        width: 28rem;
+        height: 28rem;
+        background-color: var(--color-fourth);
+        box-shadow: 0 1px 10px #ccc;
+        z-index: 1000;
+        > .code {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          text-align: center;
+          white-space: nowrap;
+        }
+        .close {
+          display: block;
+          position: absolute;
+          cursor: pointer;
+          right: 1rem;
+          top: 1rem;
+        }
       }
     }
     .toolbar-weixin {
@@ -138,7 +164,7 @@ header {
       }
     }
     .company-name {
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       flex-grow: 1;
       color: var(--color-primary);
       @media (min-width: 576px) {
@@ -160,7 +186,6 @@ header {
   padding-left: 0;
   padding-right: 0;
   margin: 0 auto;
-  font-size: 1.4rem;
   @media (min-width: 992px) {
     padding-top: 0;
     padding-bottom: 0;
@@ -173,7 +198,10 @@ header {
   .navbar-brand {
     color: var(--color-primary);
     font-weight: bold;
-    padding-left: 20px;
+    font-size: 1.8rem;
+    padding-left: 2rem;
+    max-width: calc(100% - 6rem);
+    overflow: hidden;
     &:hover,
     &:focus {
       color: var(--color-secondary);
@@ -182,7 +210,7 @@ header {
   .navbar-collapse {
     position: absolute;
     z-index: 999;
-    top: 2.3rem;
+    top: 3.2rem;
     width: 100%;
     @media (min-width: 992px) {
       position: static;
@@ -196,7 +224,8 @@ header {
 
     .nav-link {
       color: var(--color-fourth);
-      padding: 10px 30px;
+      font-size: 1.8rem;
+      padding: 1rem 2rem;
       &:hover,
       &:focus {
         color: var(--color-fourth);
@@ -241,8 +270,8 @@ header {
 
   // 菜单展开
   .navbar-toggler {
-    margin-right: 10px;
-    padding: 2px 6px;
+    margin-right: 1rem;
+    padding: 0.2rem 0.6rem;
     color: var(--color-primary);
     border: none;
   }
@@ -251,7 +280,7 @@ header {
   }
   // 导航栏
   .navbar-nav {
-    margin-top: 10px;
+    margin-top: 1rem;
     @media (min-width: 992px) {
       margin-top: 0;
     }
@@ -278,7 +307,7 @@ header {
     }
   }
   .dropdown-menu {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     margin-top: -1px;
     padding-top: 0;
     padding-bottom: 0;
@@ -289,14 +318,14 @@ header {
       background-color: rgba(var(--color-primary-rgb), 0.8);
     }
     a {
-      padding: 10px 10px 10px 40px;
+      padding: 1rem 1rem 1rem 4rem;
       color: #fff;
       &:hover,
       &:focus {
         background-color: rgba(var(--color-primary-rgb), 0.4);
       }
       @media (min-width: 992px) {
-        padding: 10px 10px 10px 30px;
+        padding: 1rem 1rem 1rem 3rem;
       }
     }
   }

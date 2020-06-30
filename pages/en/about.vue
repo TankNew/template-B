@@ -1,8 +1,7 @@
 <template>
   <div class="container insider">
     <h4 class="page-title">
-      <i class="fas fa-bookmark" />
-      <span>{{ currentPath.displayName }}</span>
+      <span class="name">{{ currentPath.displayName }}</span>
     </h4>
     <div v-html="companyInfo.content" class="page-content limit-width"></div>
   </div>

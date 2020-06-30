@@ -127,6 +127,10 @@ const actions = {
     const res = await this.$axios.get('/api/services/app/Announce/GetAll', params)
     if (res.data.success) return res.data.result
   },
+  async getAnounce(context, params) {
+    const res = await this.$axios.get('/api/services/app/Announce/Get', params)
+    if (res.data.success) return res.data.result
+  },
   async getPage(context, params) {
     const res = await this.$axios.get('/api/services/app/Page/Get', params)
     if (res.data.success) return res.data.result

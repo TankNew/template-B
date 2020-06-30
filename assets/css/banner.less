@@ -3,7 +3,7 @@
 .banner {
   // background-position: center center !important;
   // background-size: 170% 100% !important;
-  text-shadow: 1px 1px 2px #333;
+  text-shadow: 1px 1px 2px var(--color-tertiary);
   height: 0;
   padding-bottom: (960/1920) * 100%;
   position: relative;
@@ -42,19 +42,19 @@
     }
   }
   // 前后按钮
-  .swiper-prev,
-  .swiper-next {
+  .swiper-banner-prev,
+  .swiper-banner-next {
     display: none;
     z-index: 10;
     position: absolute;
     top: 50%;
-    width: 2.4rem;
-    height: 2.4rem;
+    width: 4rem;
+    height: 4rem;
     @media (min-width: 768px) {
       display: block;
     }
   }
-  .swiper-prev {
+  .swiper-banner-prev {
     left: 0;
     transform: rotate(-45deg) translateY(-50%);
     border-top: 0.3rem solid var(--color-fifth);
@@ -64,7 +64,7 @@
     }
   }
 
-  .swiper-next {
+  .swiper-banner-next {
     right: 0;
     transform: rotate(45deg) translateY(-50%);
     border-top: 0.3rem solid var(--color-fifth);
@@ -118,14 +118,9 @@
     }
   }
   &.sub {
-    display: none;
     .carousel-item > img {
-      max-width: (960/300) * 100%;
-      width: (960/300) * 100% !important;
     }
     .swiper-slide > img {
-      max-width: (960/300) * 100%;
-      width: (960/300) * 100% !important;
     }
   }
   @media (min-width: 768px) {
@@ -146,7 +141,6 @@
       }
     }
     &.sub {
-      display: block;
       padding-bottom: (300/1920) * 100%;
       .carousel {
         padding-bottom: (300/1920) * 100%;

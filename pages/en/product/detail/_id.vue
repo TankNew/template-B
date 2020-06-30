@@ -1,11 +1,12 @@
 <template>
   <div class="container">
-    <h4 class="page-title">
-      <i class="fas fa-bookmark" />
-      <span>{{ catalogItem.title }}</span>
-    </h4>
-    <h6 class="page-sub-title">{{ formatDate(catalogItem.creationTime) }}</h6>
     <div class="page-content limit-width">
+      <h4 class="product-detail-title">
+        <span class="name">{{ catalogItem.title }}</span>
+        <span
+          class="product-detail-date"
+        >{{ formatDate(catalogItem.creationTime) }}</span>
+      </h4>
       <div class="news-detail">
         <client-only>
           <div
@@ -29,11 +30,15 @@
               </div>
             </div>
             <div class="swiper-pagination"></div>
+            <div slot="button-prev" class="swiper-prev">
+              <i class="far fa-arrow-alt-circle-left"></i>
+            </div>
+            <div slot="button-next" class="swiper-next">
+              <i class="far fa-arrow-alt-circle-right"></i>
+            </div>
           </div>
         </client-only>
-        <div slot="button-prev" class="swiper-button-prev"></div>
-        <div slot="button-next" class="swiper-button-next"></div>
-        <div v-html="catalogItem.content" class="content"></div>
+        <div v-html="catalogItem.content"></div>
       </div>
     </div>
   </div>
@@ -52,8 +57,8 @@ export default {
           el: '.swiper-pagination'
         },
         navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev'
+          nextEl: '.swiper-next',
+          prevEl: '.swiper-prev'
         },
         autoHeight: true,
         on: {

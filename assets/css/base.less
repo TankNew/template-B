@@ -1,23 +1,8 @@
 // out: false
 @bg-gray: #e9ecef;
-
 @info: #17a2b8;
 @success: #28a745;
 @purple: #7e57c2;
-
-@orange: #ff6d40; //255,109,64
-@dark-orange: #fa5733; //250,87,51
-@cherry: #e90000; //233,0,0
-
-@white: #fff;
-
-@dark-blue: #0071d1;
-@blue: #2677b8;
-@light-blue: #3b84bf;
-@green: #6dca00;
-@gray: #f7f7f7;
-@blue-rgba: rgba(38, 119, 184, 0.9);
-@blue-icon: #3895e3;
 
 :root {
   font-size: 0.625rem;
@@ -31,7 +16,7 @@
   --color-fourth-rgb: 255, 255, 255;
   --color-fifth: #86c510;
   --color-fifth-rgb: 128, 187, 38;
-  --color-sixth: #000;
+  --color-sixth: #efecef;
   --color-seventh: #000;
   --color-eighth: #000;
   --color-ninth: #000;
@@ -65,6 +50,14 @@ body {
   // -ms-user-select: none;
   // -moz-user-select: none;
 }
+.body-container {
+  width: 100%;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 a {
   color: var(--color-tertiary);
   &:hover {
@@ -80,11 +73,22 @@ a {
     }
   }
 }
-
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.button-primary {
+  padding: 0.5rem 3.5rem;
+  border-radius: 4rem;
+  color: var(--color-fourth);
+  background-color: var(--color-primary);
+  border-color: var(--color-secondary);
+  &:hover {
+    color: var(--color-fourth);
+    background-color: var(--color-secondary);
+  }
+  &:focus,
+  &.focus {
+    color: var(--color-fourth);
+    background-color: var(--color-secondary);
+    box-shadow: 0 0 0 0.2rem rgba(var(--color-primary-rgb), 0.5);
+  }
 }
 .gongan {
   img,
@@ -94,26 +98,7 @@ ul {
     margin: 0;
   }
 }
-.bg-gray {
-  background-color: @bg-gray;
-}
-.btn-orange {
-  color: white;
-  background-color: @orange;
-  border-color: @dark-orange;
-  &:hover {
-    color: white;
-    background-color: @dark-orange;
-    border-color: @cherry;
-  }
-  &:focus,
-  &.focus {
-    color: white;
-    background-color: @dark-orange;
-    border-color: @cherry;
-    box-shadow: 0 0 0 0.2rem rgba(222, 170, 12, 0.5);
-  }
-}
+
 #__nuxt,
 #__layout {
   height: 100%;
@@ -128,11 +113,11 @@ ul {
 
 .swal-title {
   margin: 0px;
-  font-size: 16px;
+  font-size: 1.6rem;
 }
 .swal-footer {
   background-color: rgb(245, 248, 250);
-  margin-top: 20px;
+  margin-top: 2rem;
   border-top: 1px solid #e9eef1;
   overflow: hidden;
 }
@@ -150,10 +135,10 @@ ul {
   border-color: #cceecc;
 }
 .font_normal {
-  font-size: 14px;
+  font-size: 1.4rem;
 }
 .font_10 {
-  font-size: 10px;
+  font-size: 1rem;
 }
 .clear {
   clear: both;
@@ -196,23 +181,23 @@ ul {
 }
 
 .mr_5 {
-  margin-left: 5px;
-  margin-right: 5px;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 .mr_10 {
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .mr_20 {
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
 
 .pd_50 {
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-left: 5rem;
+  padding-right: 5rem;
 }
 
 .wauto {
@@ -239,8 +224,8 @@ ul {
 }
 /*checkbox定义*/
 .checkbox-circle {
-  width: 20px;
-  height: 20px;
+  width: 2rem;
+  height: 2rem;
   background: #ddd;
   margin: 0;
   border-radius: 100%;
@@ -249,14 +234,14 @@ ul {
   display: inline-block;
   label {
     display: block;
-    width: 16px;
-    height: 16px;
+    width: 1.6rem;
+    height: 1.6rem;
     border-radius: 100px;
     transition: all 0.01s ease;
     cursor: pointer;
     position: absolute;
-    top: 2px;
-    left: 2px;
+    top: 0.2rem;
+    left: 0.2rem;
     z-index: 1;
     background: #ccc;
     box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.5);

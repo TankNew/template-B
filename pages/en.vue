@@ -24,9 +24,23 @@
               :class="language=='en'?'disabled':''"
               @click="changeLanguage('en')"
             >English</a>
-            <span class="toolbar-weixin">
+            <span
+              @click="isWeixinShow=true"
+              href="javascript:void(0)"
+              class="toolbar-weixin"
+            >
               <i class="fab fa-weixin"></i>
             </span>
+            <div v-if="isWeixinShow===true" class="wexin-code">
+              <div class="code">
+                <img :src="companyInfo.weixinBarCode" />
+                <h6>扫一扫，直接在手机上打开</h6>
+                <p>推荐微信、QQ扫一扫等扫码工具</p>
+              </div>
+              <span @click="isWeixinShow=false" class="close">
+                <i class="fas fa-times"></i>
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -90,15 +104,17 @@
               </div>
             </div>
           </div>
-          <div slot="button-prev" class="swiper-prev"></div>
-          <div slot="button-next" class="swiper-next"></div>
+          <div slot="button-prev" class="swiper-banner-prev"></div>
+          <div slot="button-next" class="swiper-banner-next"></div>
           <div class="swiper-pagination"></div>
         </div>
       </client-only>
     </section>
     <section class="main">
-      <div v-if="!currentPath.isHome" class="container mt-2 breadCrumb">
-        <b-breadcrumb :items="breadCrumbItems"></b-breadcrumb>
+      <div v-if="!currentPath.isHome" class="breadCrumb-container">
+        <div class="container">
+          <b-breadcrumb :items="breadCrumbItems"></b-breadcrumb>
+        </div>
       </div>
       <nuxt-child ref="main" />
     </section>
@@ -190,8 +206,8 @@ export default {
           el: '.swiper-pagination'
         },
         navigation: {
-          nextEl: '.swiper-next',
-          prevEl: '.swiper-prev'
+          nextEl: '.swiper-banner-next',
+          prevEl: '.swiper-banner-prev'
         },
         autoHeight: true,
         on: {

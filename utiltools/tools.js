@@ -52,11 +52,9 @@ const getint = function(val) {
 //过滤html
 const _filter = function(str) {
   if (str !== null && str !== '' && str !== undefined) {
-    // const regex = /(<([^>]+)>)/gi
-    // const res = str.replace(regex, '')
-    const div = document.createElement('div')
-    div.innerHTML = str
-    const res = div.textContent || div.textContent || ''
+    const regex = /(<([^>]+)>)/gi
+    let res = str.replace(regex, '')
+    res = res.replace(/&nbsp;/gi, '')
     return res
   }
   return null

@@ -31,7 +31,7 @@
           <div slot="button-prev" class="swiper-button-prev"></div>
           <div slot="button-next" class="swiper-button-next"></div>
         </div>
-        <div v-html="catalogItem.content" class="content"></div>
+        <div v-html="catalogItem.content"></div>
       </div>
     </div>
   </div>
@@ -93,7 +93,7 @@ export default {
   created() {
     this.$store.dispatch('app/setcurrentPath', {
       path: this.path,
-      code: this.catalogItem.catalogGroup.code
+      grandId: this.catalogItem.catalogGroup.id
     })
   },
   mounted() {

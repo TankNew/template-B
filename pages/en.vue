@@ -2,79 +2,55 @@
   <div class="body-container">
     <!-- 头部 -->
     <header>
-      <!-- 移动端 -->
       <div class="fixed-bar">
-        <div class="container">
-          <div class="tel">
-            {{ $L('Tel') }}:
-            {{ companyInfo.tel }}
-          </div>
-          <div
-            class="welcome"
-          >{{ $L('Welcometo') + companyInfo.appName + $L('officialwebsite') }}!</div>
-          <div class="lang-bar-mobile">
-            <a @click="changeLanguage('zh-CN')" class="lang-switch-btn">中/EN</a>
-          </div>
-          <div class="lang-bar-pc">
-            <a
-              :class="language=='zh-CN'?'disabled':''"
-              @click="changeLanguage('zh-CN')"
-            >中文</a>|
-            <a
-              :class="language=='en'?'disabled':''"
-              @click="changeLanguage('en')"
-            >English</a>
-            <span
-              @click="isWeixinShow=true"
-              href="javascript:void(0)"
-              class="toolbar-weixin"
-            >
-              <i class="fab fa-weixin"></i>
-            </span>
-            <div v-if="isWeixinShow===true" class="wexin-code">
-              <div class="code">
-                <img :src="companyInfo.weixinBarCode" />
-                <h6>扫一扫，直接在手机上打开</h6>
-                <p>推荐微信、QQ扫一扫等扫码工具</p>
+        <div class="container position-relative">
+          <div class="fixed-bar-content">
+            <div class="header-title">
+              <div class="logo">
+                <img :src="companyInfo.logo" />
               </div>
-              <span @click="isWeixinShow=false" class="close">
-                <i class="fas fa-times"></i>
+              <div class="company-name">{{ companyInfo.appName }}</div>
+            </div>
+            <div class="lang-bar-mobile">
+              <a @click="changeLanguage('zh-CN')" class="lang-switch-btn">中/EN</a>
+            </div>
+            <div class="lang-bar-pc">
+              <span>
+                <i class="fas fa-phone-alt"></i>
+                {{ companyInfo.tel }}
+              </span>
+              <span
+                @click="isWeixinShow=true"
+                href="javascript:void(0)"
+                class="icon-weixin"
+              >
+                <i class="fab fa-weixin"></i>
               </span>
             </div>
+          </div>
+          <div v-if="isWeixinShow===true" class="wexin-code">
+            <div class="code">
+              <img :src="companyInfo.weixinBarCode" />
+              <h6>扫一扫，直接在手机上打开</h6>
+              <p>推荐微信、QQ扫一扫等扫码工具</p>
+            </div>
+            <span @click="isWeixinShow=false" class="close">
+              <i class="fas fa-times"></i>
+            </span>
           </div>
         </div>
       </div>
       <div class="header-container">
-        <!-- 网页端 -->
-        <div class="header-title">
-          <div class="logo">
-            <img :src="companyInfo.logo" />
-          </div>
-          <div class="company-name">{{ companyInfo.appName }}</div>
-        </div>
         <!-- 导航 -->
         <div class="navbar-container">
           <b-navbar toggleable="lg" type="blue" variant="blue">
-            <b-navbar-brand>{{ title }}</b-navbar-brand>
             <b-navbar-toggle target="nav-collapse">
               <i class="fas fa-align-justify"></i>
             </b-navbar-toggle>
             <b-collapse id="nav-collapse" is-nav>
               <b-navbar-nav>
                 <section v-for="item in navbars" :key="item.id">
-                  <b-nav-item-dropdown
-                    v-if="item.children&&item.children.length>0"
-                    :class="[currentPath.code&&currentPath.code.includes(item.code)?'active':'']"
-                    :text="$L(item.displayName)"
-                  >
-                    <b-dropdown-item
-                      v-for="ditem in item.children"
-                      :key="ditem.id"
-                      :to="ditem.url"
-                    >{{ $L(ditem.displayName) }}</b-dropdown-item>
-                  </b-nav-item-dropdown>
                   <b-nav-item
-                    v-else
                     :class="[currentPath.code&&currentPath.code.includes(item.code)?'active':'']"
                     :to="item.url"
                   >{{ $L(item.displayName) }}</b-nav-item>
@@ -82,6 +58,9 @@
               </b-navbar-nav>
             </b-collapse>
           </b-navbar>
+        </div>
+        <div class="lang-bar-navbar">
+          <a @click="changeLanguage('zh-CN')" class="lang-switch-btn">中/EN</a>
         </div>
       </div>
     </header>
@@ -119,28 +98,6 @@
       <nuxt-child ref="main" />
     </section>
     <footer>
-      <div class="contact-info container">
-        <div class="contact-info-company">
-          <div class="logo">
-            <img :src="companyInfo.logo" />
-          </div>
-          <div class="company-name">{{ companyInfo.appName }}</div>
-        </div>
-        <div class="contact-info-contact">
-          <div class="email">
-            <span>{{ Email }}:</span>
-            {{ companyInfo.email }}
-          </div>
-          <div class="tel">
-            <span>{{ Tel }}:</span>
-            {{ companyInfo.tel }}
-          </div>
-          <div class="address">
-            <span>{{ Address }}:</span>
-            {{ companyInfo.appAddress }}
-          </div>
-        </div>
-      </div>
       <div class="container icp">
         <dl>
           <dt>
@@ -155,7 +112,7 @@
               target="_blank"
               href="http://beian.miit.gov.cn/publish/query/indexFirst.action"
             >
-              <p>津ICP备{{ item }}</p>
+              <span>津ICP备{{ item }}</span>
             </a>
           </dd>
           <dd v-for="item in companyInfo.gongAns">
@@ -165,7 +122,7 @@
               target="_blank"
             >
               <img src="@/assets/imgs/gongan.png" />
-              <p>津公网安备{{ item }}号</p>
+              <span>津公网安备{{ item }}号</span>
             </a>
           </dd>
           <dd>
@@ -209,6 +166,7 @@ export default {
           nextEl: '.swiper-banner-next',
           prevEl: '.swiper-banner-prev'
         },
+        loop: true,
         autoHeight: true,
         on: {
           slideChange() {},

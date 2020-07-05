@@ -2,10 +2,18 @@
   <div class="body-container">
     <!-- 头部 -->
     <header>
-      <div class="fixed-bar">
+      <div :class="['fixed-bar',currentPath.navbarType!==5?'sub':''] ">
         <div class="container position-relative">
           <div class="fixed-bar-content">
-            <div class="header-title">
+            <a
+              v-if="currentPath.navbarType!==5"
+              @click="back"
+              class="mobile-back"
+            >
+              <i class="fas fa-chevron-left"></i>
+              {{ $L(`Back`) }}
+            </a>
+            <div v-else class="header-title">
               <div class="logo">
                 <img :src="companyInfo.logo" />
               </div>
@@ -224,6 +232,9 @@ export default {
   },
   mounted() {},
   methods: {
+    back() {
+      this.$router.back(-1)
+    },
     changeLanguage(lang) {
       window.location.href = '/' + lang + '/home'
     },

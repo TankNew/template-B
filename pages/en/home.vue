@@ -16,7 +16,7 @@
         </li>
       </ul>
     </section>
-    <section class="container product-list">
+    <section v-if="productGroup1" class="container product-list">
       <h3 class="block-title">
         <span class="name">{{ productGroup1.displayName }}</span>
         <span class="more">
@@ -29,6 +29,7 @@
       <ul>
         <li
           v-for="item in productGroup1.items"
+          :key="item.id"
           @click="goNewsDetail(item.id,3)"
         >
           <div class="product-icon-container">
@@ -44,7 +45,7 @@
         </li>
       </ul>
     </section>
-    <section class="container">
+    <section v-if="newsGroup1" class="container">
       <section class="news-container">
         <section class="news">
           <div class="news-list">
@@ -58,7 +59,7 @@
                   >{{ $L('More') }} ></a>
                 </span>
               </dt>
-              <dd v-for="item in newsGroup1.items" :key="item">
+              <dd v-for="item in newsGroup1.items" :key="item.id">
                 <a
                   class="gray"
                   href="javascript:void(0)"
@@ -75,11 +76,7 @@
                 <span class="name">{{ ad1.title }}</span>
                 <span class="more"></span>
               </h3>
-              <div class="ad-text">
-                {{ ad1.text }}Documentation and examples for Bootstrap’s powerful, responsive navigation header, the navbar. Includes support for branding, navigation, and more, including support for our collapse pluginDocumentation and examples for Bootstrap’s powerful, responsive navigation header, the navbar. Includes support for branding, navigation, and more, including support for our collapse pluginDocumentation and examples for Bootstrap’s powerful, responsive navigation header, the navbar. Includes support for branding, navigation, and more, including support for our collapse pluginDocumentation and examples for Bootstrap’s powerful, responsive navigation header, the navbar. Includes support for branding, navigation, and more, including support for our collapse pluginDocumentation and examples for Bootstrap’s powerful, responsive navigation header, the navbar. Includes support for branding, navigation, and more, including support for our
-                collapse pluginDocumentation and examples for Bootstrap’s powerful, responsive navigation header, the navbar. Includes support for branding, navigation, and more, including support for our collapse pluginDocumentation and examples for Bootstrap’s powerful, responsive navigation header, the navbar. Includes support for branding, navigation, and more, including support for our collapse pluginDocumentation and examples for Bootstrap’s powerful, responsive navigation header, the navbar. Includes support for branding, navigation, and more, including support for our collapse pluginDocumentation and examples for Bootstrap’s powerful, responsive navigation header, the navbar. Includes support for branding, navigation, and more, including support for our
-                collapse pluginDocumentation and examples for Bootstrap’s powerful, responsive navigation header, the navbar. Includes support for branding, navigation, and more, including support for our collapse pluginDocumentation and examples for Bootstrap’s powerful, responsive navigation header, the navbar. Includes support for branding, navigation, and more, including support for our collapse pluginDocumentation and examples for Bootstrap’s powerful, responsive navigation header, the navbar. Includes support for branding, navigation, and more, including support for our collapse pluginDocumentation and examples for Bootstrap’s powerful, responsive navigation header, the navbar. Includes support for branding, navigation, and more, including support for our collapse plugin
-              </div>
+              <div class="ad-text">{{ ad1.text }}</div>
               <div class="ad-links">
                 <a
                   :href="ad1.url?ad1.url:'/'"
@@ -91,7 +88,7 @@
         </section>
       </section>
     </section>
-    <section class="container picnews">
+    <section v-if="productGroup1" class="container picnews">
       <h3 class="block-title">
         <span class="name">{{ productGroup1.displayName }}</span>
         <span class="more">
@@ -135,9 +132,9 @@ export default {
       isProductLoading: false,
       swiperOption: {
         autoplay: true,
-        slidesPerView: 5,
+        slidesPerView: 3,
         spaceBetween: 30,
-        slidesPerGroup: 5,
+        slidesPerGroup: 3,
         loop: true
       }
     }

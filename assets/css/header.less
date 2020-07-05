@@ -6,20 +6,29 @@ header {
     width: 100%;
     padding: 1rem;
     max-height: 6rem;
+    z-index: 1999;
     color: @color-white;
     background-color: @color-primary;
-    z-index: 99;
+    &.sub {
+      color: @color-gray-dark;
+      background-color: @bg-gray;
+    }
     > * {
       opacity: 1;
     }
     @media (min-width: 992px) {
       position: static;
+      color: @color-white;
+      background-color: @color-primary;
     }
     .fixed-bar-content {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
+      .mobile-back {
+        font-size: 1.6rem;
+      }
       .header-title {
         display: flex;
         flex-direction: row;
@@ -29,6 +38,7 @@ header {
           margin-right: 4px;
           > img {
             height: 4rem;
+            filter: brightness(100);
           }
         }
         .company-name {
@@ -76,7 +86,7 @@ header {
           cursor: pointer;
           font-weight: normal;
           border-radius: 20px;
-          border: 1px solid @color-white;
+          border: 1px solid @color-primary-lighter;
           padding: 0.2rem 2rem;
         }
       }
@@ -187,7 +197,7 @@ header {
     z-index: 999;
     top: 0.5rem;
     width: 50%;
-    background-color: hsla(var(--color-primary-base), 0.8);
+    background-color: hsla(var(--color-primary-dark-base), 0.8);
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     border-top-right-radius: 1rem;
@@ -226,12 +236,12 @@ header {
       .nav-link {
         padding: 0.5rem 2rem;
         margin: 0 1rem;
-        color: @color-gray;
+        color: @color-gray-dark;
         border-radius: 2rem;
         &:hover,
         &:focus {
           color: @color-white;
-          background-color: @color-gray-dark;
+          background-color: @color-gray;
         }
         &.disabled {
           color: @color-gray-dark;
@@ -262,8 +272,8 @@ header {
     border-bottom-right-radius: 1rem;
     opacity: 0.8;
     position: absolute;
+    top: 0.1rem;
     z-index: 999;
-    top: 0.5rem;
     &.not-collapsed {
       display: none;
     }

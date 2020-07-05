@@ -1,7 +1,8 @@
 <template>
   <div class="container">
-    <h4 class="page-title">
+    <h4 class="page-title wide">
       <span class="name">{{ currentPath.displayName }}</span>
+      <span class="more"></span>
     </h4>
     <div v-if="currentPathParent!==null" class="page-inside-nav">
       <dl>

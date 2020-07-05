@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h4 class="page-title">
+    <h4 class="page-detail-title">
       <span>{{ catalogItem.title }}</span>
     </h4>
     <h6 class="page-sub-title">{{ formatDate(catalogItem.creationTime) }}</h6>
@@ -32,25 +32,6 @@
         </div>
         <div v-html="catalogItem.content"></div>
       </div>
-      <section class="page-content-announce">
-        <client-only>
-          <div v-swiper:mySwiper="swiperOption">
-            <div class="swiper-wrapper position-relative">
-              <div
-                v-for="(item, index) in annouces"
-                :key="index"
-                @click="target(item.id)"
-                class="swiper-slide"
-              >
-                <img :src="item.cover" />
-                <div class="slide-info">
-                  <a>{{ item.title }}</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </client-only>
-      </section>
     </div>
   </div>
 </template>

@@ -1,7 +1,8 @@
 <template>
-  <div class="container insider">
+  <div class="container">
     <h4 class="page-title">
       <span class="name">{{ currentPath.displayName }}</span>
+      <span class="more"></span>
     </h4>
     <div v-html="companyInfo.content" class="page-content limit-width"></div>
   </div>

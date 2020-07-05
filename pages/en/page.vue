@@ -4,6 +4,7 @@
       <span
         class="name"
       >{{ currentPathParent!==null?currentPathParent.displayName:currentPath.displayName }}</span>
+      <span class="more"></span>
     </h4>
     <div v-if="currentPathParent!==null" class="page-inside-nav">
       <dl>

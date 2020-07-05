@@ -1,7 +1,8 @@
 <template>
-  <div class="container insider">
+  <div class="container">
     <h4 class="page-title">
       <span class="name">{{ currentPath.displayName }}</span>
+      <span class="more"></span>
     </h4>
     <div class="page-content">
       <div class="partners">
@@ -11,7 +12,7 @@
             :key="item.id"
             :style="'animation-delay:'+index*0.5+'s;'"
           >
-            <a :href="item.url" target="_blank">
+            <a :href="item.url" class="gray" target="_blank">
               <img :src="item.logo" />
               <span>{{ item.title }}</span>
             </a>

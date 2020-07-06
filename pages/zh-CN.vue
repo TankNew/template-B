@@ -227,14 +227,8 @@ export default {
   },
   created() {
     this.setcurrentPath({ path: this.$route.path })
-    console.log(this.currentPath)
-    console.log(this.currentPathParent)
   },
-  mounted() {
-    console.log(window.getComputedStyle(document.documentElement).getPropertyValue('--primary-hue'))
-    console.log(window.getComputedStyle(document.documentElement).getPropertyValue('--primary-saturation'))
-    console.log(window.getComputedStyle(document.documentElement).getPropertyValue('--primary-lightness'))
-  },
+  mounted() {},
   methods: {
     back() {
       this.$router.back(-1)

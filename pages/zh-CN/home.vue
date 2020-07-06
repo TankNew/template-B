@@ -216,9 +216,6 @@ export default {
     announces = (await store.dispatch('app/getAnounces', params)).items
     return { ad1, announces, newsGroup1, picGroup1, productGroup1 }
   },
-  /**存放异步方法 */
-  created() {},
-  mounted() {},
   methods: {
     target(id) {
       window.open(`/${this.culture}/announce/detail/` + String(id, '_blank'))
@@ -258,7 +255,6 @@ export default {
     filter(val, length) {
       return tools.cutString(tools._filter(val), length)
     },
-
     async loadProductGroup1SubGroupItems(item) {
       this.isProductLoading = true
       const params = {

@@ -16,7 +16,7 @@
               <div class="company-name">{{ companyInfo.appName }}</div>
             </div>
             <div class="lang-bar-mobile">
-              <a @click="changeLanguage('zh-CN')" class="lang-switch-btn">中/EN</a>
+              <a @click="changeLanguage('en')" class="lang-switch-btn">中/EN</a>
             </div>
             <div class="lang-bar-pc">
               <span>
@@ -54,8 +54,20 @@
             <b-collapse id="nav-collapse" is-nav>
               <b-navbar-nav>
                 <section v-for="item in navbars" :key="item.id">
+                  <b-nav-item-dropdown
+                    v-if="item.children&&item.children.length>0"
+                    :class="[currentPath.code&&((item.navbarType!==5&&currentPath.code.includes(item.code))||(item.navbarType===5&&currentPath.code===item.code))?'active':'']"
+                    :text="$L(item.displayName)"
+                  >
+                    <b-dropdown-item
+                      v-for="ditem in item.children"
+                      :key="ditem.id"
+                      :to="ditem.url"
+                    >{{ $L(ditem.displayName) }}</b-dropdown-item>
+                  </b-nav-item-dropdown>
                   <b-nav-item
-                    :class="[currentPath.code&&currentPath.code.includes(item.code)?'active':'']"
+                    v-else
+                    :class="[currentPath.code&&((item.navbarType!==5&&currentPath.code.includes(item.code))||(item.navbarType===5&&currentPath.code===item.code))?'active':'']"
                     :to="item.url"
                   >{{ $L(item.displayName) }}</b-nav-item>
                 </section>
@@ -64,7 +76,7 @@
           </b-navbar>
         </div>
         <div class="lang-bar-navbar">
-          <a @click="changeLanguage('zh-CN')" class="lang-switch-btn">中/EN</a>
+          <a @click="changeLanguage('en')" class="lang-switch-btn">中/EN</a>
         </div>
       </div>
     </header>

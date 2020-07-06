@@ -28,18 +28,18 @@
       </h3>
       <ul>
         <li
-          v-for="item in productGroup1.items"
+          v-for="item in productGroup1.children"
           :key="item.id"
-          @click="goNewsDetail(item.id,3)"
+          @click="goNewsGroup(item.id,3)"
         >
           <div class="product-icon-container">
             <div class="product-icon">
               <span class="icon">
-                <img :src="item.cover" />
+                <img :src="item.icon" />
               </span>
             </div>
             <div class="product-info">
-              <span>{{ item.title }}</span>
+              <span>{{ item.displayName }}</span>
             </div>
           </div>
         </li>

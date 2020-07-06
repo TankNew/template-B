@@ -41,7 +41,7 @@ const actions = {
       if (child !== null) {
         parents = []
         actions.findParentsByCode(array, child.code)
-        parents = parents.sort((a, b) => a.code.length - b.code.length)
+        parents = parents.filter(x => x.code !== home.code).sort((a, b) => a.code.length - b.code.length)
         context.state.currentPath = child
         actions.setBreadCrumb(context, home, ...parents)
         let currentPathParent = null

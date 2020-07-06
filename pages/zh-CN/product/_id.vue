@@ -1,5 +1,5 @@
 <template>
-  <div class="product-inside-container">
+  <div class="container">
     <h4 class="page-title wide">
       <span class="name">{{ currentPath.displayName }}</span>
       <span class="more"></span>

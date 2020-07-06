@@ -1,10 +1,10 @@
 <template>
   <div class="container">
-    <h4 class="page-title wide">
-      <span class="name">{{ currentPath.displayName }}</span>
-      <span class="more"></span>
-    </h4>
     <section v-if="hasChildren">
+      <h4 class="page-title wide">
+        <span class="name">{{ currentPath.displayName }}</span>
+        <span class="more"></span>
+      </h4>
       <div class="page-product-list">
         <ul>
           <li
@@ -27,13 +27,25 @@
     </section>
     <section v-else class="page-news-list-container">
       <div class="page-news-leftbar">
-        <dl class="page-news-leftbar-groups">
-          <dt>{{ $L(`QuickMenu`) }}</dt>
-          <dd v-for="item in currentPathParent.children" :key="item.code">
+        <dl
+          v-if="currentPath.children.length>0"
+          class="page-news-leftbar-groups"
+        >
+          <dt>{{ currentPath.displayName }}</dt>
+          <dd v-for="item in currentPath.children" :key="item.code">
             <a
               @click="goNewsGroup(item.catalogGroupId,1)"
               href="javascript:void(0)"
             >{{ item.displayName }}</a>
+          </dd>
+        </dl>
+        <dl class="page-news-leftbar-announce">
+          <dt>{{ $L(`Announce`) }}</dt>
+          <dd v-for="item in announces" :key="item.code">
+            <a
+              @click="target(item.id)"
+              href="javascript:void(0)"
+            >{{ item.title }}</a>
           </dd>
         </dl>
         <dl class="page-news-leftbar-contactus">
@@ -57,7 +69,7 @@
           >
             <div class="news-info">
               <a class="news-title" href="javascript:void(0)">{{ item.title }}</a>
-              <p class="news-intro">{{ filter(item.content,120) }}</p>
+              <p class="news-intro">{{ filter(item.content,200) }}</p>
             </div>
           </li>
         </ul>
@@ -108,13 +120,23 @@ export default {
     return /^\d+$/.test(params.id)
   },
   async asyncData({ isDev, route, store, env, params, query, req, res, redirect, error }) {
-    const subJson = await store.dispatch('app/getCatalogGroupList', { params: { id: route.params.id } })
-    return { subGroups: subJson }
+    const subGroups = await store.dispatch('app/getCatalogGroupList', { params: { id: route.params.id } })
+    params = {
+      params: {
+        SkipCount: 0,
+        MaxResultCount: 2
+      }
+    }
+    const announces = (await store.dispatch('app/getAnounces', params)).items
+    return { subGroups, announces }
   },
   created() {
     this.pageChange()
   },
   methods: {
+    target(id) {
+      window.open(`/${this.culture}/announce/detail/` + String(id, '_blank'))
+    },
     goNewsGroup(id, type) {
       switch (type) {
         case 1:

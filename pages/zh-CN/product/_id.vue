@@ -19,7 +19,7 @@
               <span class="cover-title">
                 <a href="javascript:void(0)">{{ item.displayName }}</a>
               </span>
-              <p v-html="filter(item.info,40)" class="cover-content"></p>
+              <p v-html="filter(item.info,100)" class="cover-content"></p>
             </div>
           </li>
         </ul>
@@ -40,7 +40,7 @@
               <span class="cover-title">
                 <a href="javascript:void(0)">{{ item.title }}</a>
               </span>
-              <p v-html="filter(item.content,40)" class="cover-content"></p>
+              <p v-html="filter(item.content,100)" class="cover-content"></p>
             </div>
           </li>
         </ul>

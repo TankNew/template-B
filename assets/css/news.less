@@ -9,6 +9,13 @@
     padding: 2rem;
   }
 }
+.page-news {
+  .page-title {
+    @media (min-width: 768px) {
+      display: none;
+    }
+  }
+}
 .page-news-list-container {
   margin: 2rem auto;
   padding-left: 0.6rem;
@@ -64,6 +71,19 @@
       }
     }
     &.page-news-leftbar-announce {
+      dd {
+        padding-left: 0;
+        a {
+          padding: 0.8rem 1.2rem;
+          display: block;
+          margin-bottom: 0.1rem;
+          font-size: 1.4rem;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          height: 3rem;
+        }
+      }
     }
   }
 }
@@ -92,7 +112,18 @@
       line-height: 1px;
       color: @color-primary;
     }
+    .news-date {
+      display: none;
+    }
     .news-info {
+      width: 100%;
+      .news-title {
+        width: 100%;
+        display: inline-block;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
       .news-intro {
         display: none;
       }
@@ -102,21 +133,38 @@
     margin-left: 10px;
     width: calc(75% - 10px);
     li {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
       &::before {
         display: none;
       }
-      .news-info {
-        width: 100%;
-        .news-title {
-          width: 100%;
-          display: inline-block;
+      .news-date {
+        display: block;
+        padding: 1rem 2rem;
+        background-color: @color-gray-lighter;
+        color: @color-gray-dark;
+        border-radius: 1rem;
+        span {
+          display: block;
+          text-align: center;
           font-size: 1.6rem;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-          overflow: hidden;
+          &.news-day {
+            font-size: 2.4rem;
+          }
+        }
+      }
+      .news-info {
+        width: calc(100% - 10rem);
+        .news-title {
+          font-size: 1.6rem;
         }
         .news-intro {
           margin-top: 0.2rem;
+          margin-bottom: 0;
+          height: 4rem;
           display: block;
           text-overflow: ellipsis;
           overflow: hidden;

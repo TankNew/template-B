@@ -259,18 +259,24 @@ header {
         margin: 0 1rem;
         color: @color-gray-dark;
         border-radius: 2rem;
-        &:hover,
+        &:hover {
+          color: @color-white !important;
+          background-color: @color-primary-lighter;
+        }
         &:focus {
-          color: @color-white;
-          background-color: @color-gray;
+          color: @color-gray-dark;
         }
         &.disabled {
-          color: @color-gray-dark;
+          color: @color-gray;
         }
       }
       .show > .nav-link,
+      .nav-link.show， {
+        color: @color-white;
+        background-color: @color-primary-lighter;
+      }
       .active > .nav-link,
-      .nav-link.show， .nav-link.active {
+      .nav-link.active {
         color: @color-white;
         background-color: @color-primary;
       }

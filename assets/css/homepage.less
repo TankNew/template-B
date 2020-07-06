@@ -154,11 +154,13 @@
   }
   .news-container {
     @media (min-width: 992px) {
-      height: 0;
-      padding-bottom: 35%;
+      height: 32rem;
+      overflow: hidden;
       position: relative;
     }
     .news {
+      display: flex;
+      flex-direction: row;
       @media (min-width: 992px) {
         background-color: @bg-gray;
         width: 100%;
@@ -170,8 +172,6 @@
           margin-top: 0;
         }
       }
-      display: flex;
-      flex-direction: row;
     }
     .news-list {
       width: 100%;
@@ -218,7 +218,7 @@
         .ad-text {
           margin-bottom: 2rem;
           overflow: hidden;
-          height: calc(100% - 16rem);
+          height: calc(100% - 16.2rem);
         }
       }
       @media (min-width: 992px) {

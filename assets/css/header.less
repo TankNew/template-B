@@ -12,14 +12,17 @@ header {
     &.sub {
       color: @color-gray-dark;
       background-color: @bg-gray;
+      .fixed-bar-content {
+        .mobile-back {
+          display: inline-block;
+        }
+        .header-title {
+          display: none;
+        }
+      }
     }
     > * {
       opacity: 1;
-    }
-    @media (min-width: 992px) {
-      position: static;
-      color: @color-white;
-      background-color: @color-primary;
     }
     .fixed-bar-content {
       display: flex;
@@ -27,6 +30,7 @@ header {
       justify-content: space-between;
       align-items: center;
       .mobile-back {
+        display: none;
         font-size: 1.6rem;
       }
       .header-title {
@@ -38,7 +42,7 @@ header {
           margin-right: 4px;
           > img {
             height: 4rem;
-            filter: brightness(100);
+            filter: grayscale(100%) brightness(100);
           }
         }
         .company-name {
@@ -115,6 +119,23 @@ header {
         cursor: pointer;
         right: 1rem;
         top: 1rem;
+      }
+    }
+    @media (min-width: 992px) {
+      position: static;
+      color: @color-white;
+      background-color: @color-primary;
+      &.sub {
+        .fixed-bar-content {
+          .mobile-back {
+            display: none;
+          }
+          .header-title {
+            display: flex;
+          }
+        }
+        color: @color-white;
+        background-color: @color-primary;
       }
     }
   }
@@ -214,7 +235,7 @@ header {
 
     .nav-link {
       color: @color-white;
-      font-size: 1.6rem;
+      font-size: 1.4rem;
       padding: 1rem 2rem;
       &:hover,
       &:focus {
@@ -234,7 +255,7 @@ header {
       background: none;
       max-width: 960px;
       .nav-link {
-        padding: 0.5rem 2rem;
+        padding: 0.6rem 1.2rem;
         margin: 0 1rem;
         color: @color-gray-dark;
         border-radius: 2rem;
@@ -270,6 +291,7 @@ header {
     border-bottom-left-radius: 0;
     border-top-right-radius: 1rem;
     border-bottom-right-radius: 1rem;
+    box-shadow: 0 0 1px 1px @color-white;
     opacity: 0.8;
     position: absolute;
     top: 0.1rem;

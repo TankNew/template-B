@@ -87,14 +87,14 @@ export default {
         path += 'product/' + catalogItem.catalogGroup.id
         break
     }
-    const annoucesParams = {
+    const announcesParams = {
       params: {
         SkipCount: 0,
         MaxResultCount: 10
       }
     }
-    const annouces = (await store.dispatch('app/getAnounces', annoucesParams)).items
-    return { catalogItem, path, annouces }
+    const announces = (await store.dispatch('app/getAnounces', announcesParams)).items
+    return { catalogItem, path, announces }
   },
   created() {
     this.$store.dispatch('app/setcurrentPath', {
@@ -108,7 +108,7 @@ export default {
   },
   methods: {
     target(id) {
-      window.open(`/${this.culture}/annouce/detail/` + String(id, '_blank'))
+      window.open(`/${this.culture}/announce/detail/` + String(id, '_blank'))
     },
     formatDate(val) {
       return tools.date(val)

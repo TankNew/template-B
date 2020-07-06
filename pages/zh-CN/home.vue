@@ -4,7 +4,7 @@
       <h3 class="block-title">
         <span class="name">{{ $L(`Announce`) }}</span>
         <span class="more">
-          <a :href="`/${culture}/annouce`">{{ $L('More') }} ></a>
+          <a :href="`/${culture}/announce`">{{ $L('More') }} ></a>
         </span>
       </h3>
       <ul>
@@ -221,7 +221,7 @@ export default {
   mounted() {},
   methods: {
     target(id) {
-      window.open(`/${this.culture}/annouce/detail/` + String(id, '_blank'))
+      window.open(`/${this.culture}/announce/detail/` + String(id, '_blank'))
     },
     getImgUrl(val) {
       if (val) return AppConsts.remoteServiceBaseUrl + val

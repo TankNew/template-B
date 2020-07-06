@@ -25,7 +25,6 @@ export default {
     let abp = context.store.state.abp
     let temp = abp.setting.values['Abp.Localization.LanguageDefineByBrower']
     let isLanguageDefineByBrower = temp === 'true' || temp === 'True'
-
     if (!isLanguageDefineByBrower) {
       let langs = abp.localization.languages
       let defaultLang = 'zh-CN'

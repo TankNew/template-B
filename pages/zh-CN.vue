@@ -5,15 +5,11 @@
       <div :class="['fixed-bar',currentPath.navbarType!==5?'sub':''] ">
         <div class="container position-relative">
           <div class="fixed-bar-content">
-            <a
-              v-if="currentPath.navbarType!==5"
-              @click="back"
-              class="mobile-back"
-            >
+            <a @click="back" class="mobile-back">
               <i class="fas fa-chevron-left"></i>
               {{ $L(`Back`) }}
             </a>
-            <div v-else class="header-title">
+            <div class="header-title">
               <div class="logo">
                 <img :src="companyInfo.logo" />
               </div>
@@ -195,7 +191,9 @@ export default {
         state.app.currentPath.bannerImgs
           ? state.app.currentPath.bannerImgs.length > 0
             ? state.app.currentPath.bannerImgs
-            : state.app.currentPathParent.bannerImgs
+            : state.app.currentPathParent
+            ? state.app.currentPathParent.bannerImgs
+            : []
           : []
     }),
     title() {
@@ -217,7 +215,7 @@ export default {
     }
   },
   async asyncData(context) {
-    let language = `en`
+    let language = `zh-CN`
     context.app.$cookies.set(context.store.state.app.headerName, language, {
       path: context.store.state.abp.appPath || '/',
       maxAge: 5 * 365 * 86400000
@@ -229,8 +227,14 @@ export default {
   },
   created() {
     this.setcurrentPath({ path: this.$route.path })
+    console.log(this.currentPath)
+    console.log(this.currentPathParent)
   },
-  mounted() {},
+  mounted() {
+    console.log(window.getComputedStyle(document.documentElement).getPropertyValue('--primary-hue'))
+    console.log(window.getComputedStyle(document.documentElement).getPropertyValue('--primary-saturation'))
+    console.log(window.getComputedStyle(document.documentElement).getPropertyValue('--primary-lightness'))
+  },
   methods: {
     back() {
       this.$router.back(-1)

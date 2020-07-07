@@ -165,7 +165,10 @@ export default {
         { hid: 'keywords', name: 'keywords', content: this.companyInfo.seoKeyWords },
         { hid: 'description', name: 'description', content: this.companyInfo.description }
       ],
-      link: [{ rel: 'icon', type: 'image/x-icon', href: this.companyInfo.icon }]
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: this.companyInfo.icon }
+        // { rel: 'stylesheet', href: `/css/theme.${this.$env.NUXT_ENV_THEME}.css` }
+      ]
     }
   },
   data() {

@@ -1,5 +1,5 @@
 <template>
-  <section class="container h-100">
+  <section class="container">
     <h3>
       <i class="far fa-grin mr-3"></i>正在根据您的系统语言，进行网站重定向……
     </h3>
@@ -10,6 +10,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
+  width: 100%;
 }
 i {
   font-size: 6rem;

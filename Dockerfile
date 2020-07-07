@@ -4,7 +4,7 @@
 FROM node:11-alpine as build
 WORKDIR /app
 COPY package*.json ./
-# RUN npm config set registry https://registry.npm.taobao.org
+RUN npm config set registry https://registry.npm.taobao.org
 RUN npm install
 COPY . .
 RUN npm run build
@@ -14,4 +14,6 @@ COPY --from=build /app /
 ENV HOST 0.0.0.0 
 ENV PORT 80 
 ENV ENV NODE_ENV=production
+ENV NUXT_ENV_THEME=red
+ENV NUXT_ENV_TENANT_ID=18
 CMD ["npm","start"]

@@ -52,7 +52,6 @@ export default {
    */
   css: [
     'swiper/dist/css/swiper.css',
-    `assets/css/theme.${process.env.THEME ? process.env.THEME + '.' : ''}less`,
     '~/static/css/all.min.css'
     // '~/node_modules/material-design-icons/iconfont/material-icons.css'
   ],
@@ -80,7 +79,16 @@ export default {
     'bootstrap-vue/nuxt',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    'cookie-universal-nuxt'
+    'cookie-universal-nuxt',
+    [
+      'nuxt-env',
+      {
+        keys: [
+          { key: 'NUXT_ENV_TENANT_ID', default: 18, secret: false },
+          { key: 'NUXT_ENV_THEME', default: 'red', secret: false }
+        ]
+      }
+    ]
   ],
   /*
      ** Axios module configuration

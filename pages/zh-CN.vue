@@ -15,7 +15,7 @@
               </div>
               <div class="company-name">{{ companyInfo.appName }}</div>
             </div>
-            <div class="lang-bar-mobile">
+            <div v-if="multiLangs" class="lang-bar-mobile">
               <a @click="changeLanguage('en')" class="lang-switch-btn">中/EN</a>
             </div>
             <div class="lang-bar-pc">
@@ -75,7 +75,7 @@
             </b-collapse>
           </b-navbar>
         </div>
-        <div class="lang-bar-navbar">
+        <div v-if="multiLangs" class="lang-bar-navbar">
           <a @click="changeLanguage('en')" class="lang-switch-btn">中/EN</a>
         </div>
       </div>
@@ -194,6 +194,7 @@ export default {
   computed: {
     ...mapState({
       abp: state => state.abp,
+      multiLangs: state => state.abp.localization.languages.length > 1,
       companyInfo: state => state.app.companyInfo,
       navbars: state => state.app.navbars.slice(0, 8),
       currentPath: state => state.app.currentPath,
@@ -240,7 +241,6 @@ export default {
   created() {
     this.setcurrentPath({ path: this.$route.path })
   },
-  mounted() {},
   methods: {
     back() {
       this.$router.back(-1)

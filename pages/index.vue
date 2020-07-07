@@ -1,19 +1,25 @@
 <template>
-  <div class="container">
-    <div>
-      <logo />
-    </div>
-  </div>
+  <section class="container h-100">
+    <h3>
+      <i class="far fa-grin mr-3"></i>正在根据您的系统语言，进行网站重定向……
+    </h3>
+  </section>
 </template>
-
+<style lang="less" scoped>
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+i {
+  font-size: 6rem;
+}
+</style>
 <script>
 import axios from 'axios'
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 import Logo from '~/components/Logo.vue'
 export default {
-  components: {
-    Logo
-  },
   computed: {
     ...mapState({
       abp: state => state.abp
@@ -35,7 +41,7 @@ export default {
     }
     // The fetch method is used to fill the store before rendering the page
   },
-  mounted() {
+  beforeMount() {
     let navigatorLanguage = navigator.language
     let langs = this.abp.localization.languages
     if (langs.find(x => x.name === navigatorLanguage) !== undefined) this.$router.replace(`/${navigatorLanguage}/home`)

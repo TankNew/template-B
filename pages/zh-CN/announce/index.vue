@@ -55,6 +55,7 @@ export default {
   computed: {
     ...mapState({
       navbars: state => state.app.navbars,
+      culture: state => state.app.culture,
       currentPath: state => state.app.currentPath,
       currentPathParent: state => state.app.currentPathParent
     })

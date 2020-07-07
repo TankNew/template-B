@@ -16,7 +16,7 @@ export default {
    ** Headers of the page
    */
   head: {
-    title: process.env.npm_package_name || '',
+    title: `Ednet共享建站 - 更节省、更安全` + process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
       {

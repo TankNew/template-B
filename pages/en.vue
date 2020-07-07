@@ -16,7 +16,7 @@
               <div class="company-name">{{ companyInfo.appName }}</div>
             </div>
             <div class="lang-bar-mobile">
-              <a @click="changeLanguage('en')" class="lang-switch-btn">中/EN</a>
+              <a @click="changeLanguage('zh-CN')" class="lang-switch-btn">中/EN</a>
             </div>
             <div class="lang-bar-pc">
               <span>
@@ -76,7 +76,7 @@
           </b-navbar>
         </div>
         <div class="lang-bar-navbar">
-          <a @click="changeLanguage('en')" class="lang-switch-btn">中/EN</a>
+          <a @click="changeLanguage('zh-CN')" class="lang-switch-btn">中/EN</a>
         </div>
       </div>
     </header>
@@ -227,7 +227,7 @@ export default {
     }
   },
   async asyncData(context) {
-    let language = `zh-CN`
+    let language = `en`
     context.app.$cookies.set(context.store.state.app.headerName, language, {
       path: context.store.state.abp.appPath || '/',
       maxAge: 5 * 365 * 86400000

@@ -121,7 +121,7 @@ header {
         top: 1rem;
       }
     }
-    @media (min-width: 992px) {
+    @media (min-width: 768px) {
       position: static;
       color: @color-white;
       background-color: @color-primary;
@@ -142,16 +142,16 @@ header {
 
   .header-container {
     width: 100%;
-    margin-top: 6rem;
+    padding-top: 6rem;
     margin-right: auto;
     margin-left: auto;
     @media (min-width: 768px) {
       max-width: 720px;
+      padding-top: 0;
     }
     @media (min-width: 992px) {
-      padding: 2rem 0;
-      margin-top: 0;
       max-width: 960px;
+      padding: 2rem 0;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -261,7 +261,7 @@ header {
         border-radius: 2rem;
         &:hover {
           color: @color-white !important;
-          background-color: @color-primary-lighter;
+          background-color: @color-primary;
         }
         &:focus {
           color: @color-gray-dark;
@@ -273,12 +273,12 @@ header {
       .show > .nav-link,
       .nav-link.show， {
         color: @color-white;
-        background-color: @color-primary-lighter;
+        background-color: @color-primary;
       }
       .active > .nav-link,
       .nav-link.active {
         color: @color-white;
-        background-color: @color-primary;
+        background-color: @color-primary-lighter;
       }
     }
     @media (min-width: 1200px) {
@@ -331,7 +331,7 @@ header {
     }
   }
   .dropdown-menu {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     margin-top: -1px;
     padding-top: 0;
     padding-bottom: 0;

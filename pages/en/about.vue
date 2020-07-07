@@ -1,12 +1,10 @@
 <template>
   <div class="container">
     <h4 class="page-title">
-      <span
-        class="name"
-      >{{ currentPath!==null?currentPath.displayName:currentPathParent.displayName }}</span>
+      <span class="name">{{ currentPath.displayName }}</span>
       <span class="more"></span>
     </h4>
-    <nuxt-child />
+    <div v-html="companyInfo.content" class="page-content limit-width"></div>
   </div>
 </template>
 <script>
@@ -18,13 +16,10 @@ export default {
   computed: {
     ...mapState({
       navbars: state => state.app.navbars,
+      companyInfo: state => state.app.companyInfo,
       currentPath: state => state.app.currentPath,
       currentPathParent: state => state.app.currentPathParent
     })
-  },
-  validate({ params }) {
-    // 必须是number类型
-    return /^\d+$/.test(params.id)
   },
   created() {},
   methods: {}

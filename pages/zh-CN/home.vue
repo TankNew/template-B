@@ -130,7 +130,6 @@ export default {
     return {
       wordIndex: 0,
       observer: null,
-      announces: [],
       isProductLoading: false,
       swiperOption: {
         autoplay: true,

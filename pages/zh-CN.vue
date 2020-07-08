@@ -165,10 +165,7 @@ export default {
         { hid: 'keywords', name: 'keywords', content: this.companyInfo.seoKeyWords },
         { hid: 'description', name: 'description', content: this.companyInfo.description }
       ],
-      link: [
-        { rel: 'icon', type: 'image/x-icon', href: this.companyInfo.icon }
-        // { rel: 'stylesheet', href: `/css/theme.${this.$env.NUXT_ENV_THEME}.css` }
-      ]
+      link: [{ rel: 'icon', type: 'image/x-icon', href: this.companyInfo.icon }]
     }
   },
   data() {
@@ -239,7 +236,8 @@ export default {
     context.store.commit('app/setCulture', language)
     await context.store.dispatch('app/getCompanyInfo')
     await context.store.dispatch('app/getNavbars')
-    return { name: 'Main', userAgent: context.userAgent, language }
+
+    return { name: 'Main', userAgent: context.userAgent, language, theme: context.$config.NUXT_ENV_THEME }
   },
   created() {
     this.setcurrentPath({ path: this.$route.path })

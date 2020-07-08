@@ -43,7 +43,7 @@ export default {
     }
     // The fetch method is used to fill the store before rendering the page
   },
-  beforeMount() {
+  mounted() {
     let navigatorLanguage = navigator.language
     let langs = this.abp.localization.languages
     if (langs.find(x => x.name === navigatorLanguage) !== undefined) this.$router.replace(`/${navigatorLanguage}/home`)

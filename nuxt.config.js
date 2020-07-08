@@ -11,6 +11,12 @@ if (process.env.NODE_ENV === 'production')
     credentials: true
   }
 export default {
+  publicRuntimeConfig: {
+    NUXT_ENV_THEME: process.env.NUXT_ENV_THEME || 'blue',
+    NUXT_ENV_TENANT_ID: process.env.NUXT_ENV_TENANT_ID || 18,
+    API_SECRET: `1234`
+  },
+  privateRuntimeConfig: {},
   mode: 'universal',
   /*
    ** Headers of the page
@@ -53,6 +59,7 @@ export default {
   css: [
     'swiper/dist/css/swiper.css',
     '~/static/css/all.min.css'
+    // 'assets/scss/bootstrap.scss'
     // '~/node_modules/material-design-icons/iconfont/material-icons.css'
   ],
   /*
@@ -79,17 +86,12 @@ export default {
     'bootstrap-vue/nuxt',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    'cookie-universal-nuxt',
-    [
-      'nuxt-env',
-      {
-        keys: [
-          { key: 'NUXT_ENV_TENANT_ID', default: 18, secret: false },
-          { key: 'NUXT_ENV_THEME', default: 'red', secret: false }
-        ]
-      }
-    ]
+    'cookie-universal-nuxt'
   ],
+  bootstrapVue: {
+    bootstrapCSS: false, // Or `css: false`
+    bootstrapVueCSS: true // Or `bvCSS: false`
+  },
   /*
      ** Axios module configuration
      ** See https://axios.nuxtjs.org/options

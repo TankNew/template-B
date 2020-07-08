@@ -46,6 +46,7 @@
               <div
                 v-for="(item, index) in picGroup1.items"
                 :key="index"
+                @click="goNewsDetail(item.id,1)"
                 class="swiper-slide"
               >
                 <img :src="item.cover" />
@@ -66,7 +67,7 @@
         </span>
       </h3>
       <ul>
-        <li v-for="item in announces" :key="item.id">
+        <li v-for="item in announces" :key="item.id" @click="target(item.id)">
           <div class="cover">
             <img :src="item.cover" />
           </div>
@@ -90,9 +91,10 @@
               </dt>
               <dd v-for="item in newsGroup1.items" :key="item.id">
                 <a
+                  @click="goNewsDetail(item.id,1)"
                   class="gray"
                   href="javascript:void(0)"
-                >{{ filter(`Documentation and examples for Bootstrap’s powerful, responsive navigation header, the navbar. Includes support for branding, navigation, and more, including support for our collapse plugin.`,60) }}</a>
+                >{{ filter(item.title,60) }}</a>
               </dd>
             </dl>
           </div>
@@ -108,7 +110,7 @@
               <div class="ad-text">{{ ad1.text }}</div>
               <div class="ad-links">
                 <a
-                  :href="ad1.url?ad1.url:'/'"
+                  :href="ad1.url?ad1.url:'javascript:void(0)'"
                   class="button-primary"
                 >{{ $L(`More`) }} ></a>
               </div>
@@ -218,6 +220,7 @@ export default {
   },
   methods: {
     target(id) {
+      console.log(id)
       window.open(`/${this.culture}/announce/detail/` + String(id, '_blank'))
     },
     getImgUrl(val) {

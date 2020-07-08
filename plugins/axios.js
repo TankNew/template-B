@@ -1,5 +1,4 @@
-export default function({ $axios, store, app, redirect }) {
-  require(`assets/css/theme.${app.$env.NUXT_ENV_THEME}.less`)
+export default function({ $axios, store, app, redirect, $config }) {
   $axios.onRequest(
     config => {
       config.headers.common[store.state.app.headerName] = store.getters['app/getCulture']
@@ -7,8 +6,7 @@ export default function({ $axios, store, app, redirect }) {
       const multiTenancyHeader = 'Abp.TenantId'
       const multiTenancy = app.$cookies.get(multiTenancyHeader)
       // 加载ID环境变量
-      config.headers.common[multiTenancyHeader] = app.$env.NUXT_ENV_TENANT_ID
-
+      config.headers.common[multiTenancyHeader] = $config.NUXT_ENV_TENANT_ID
       return config
     },
     function(error) {

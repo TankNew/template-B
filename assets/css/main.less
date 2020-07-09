@@ -1,6 +1,7 @@
 // out: false
 .main {
   min-height: 20rem;
+  position: relative;
   .breadCrumb-container {
     display: none;
     background-color: @bg-gray;
@@ -130,7 +131,7 @@
       .list {
         max-height: 0;
         overflow: hidden;
-        background-color: hsla(var(--color-primary-lighter-base), 0.8);
+        background-color: hsla(@color-primary-lighter-hsl, 0.8);
         > dl {
           padding: 1rem 0;
           margin-bottom: 0;

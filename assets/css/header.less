@@ -337,13 +337,13 @@ header {
     padding-bottom: 0;
     border-top: none;
     min-width: 100%;
-    background-color: hsla(var(--color-primary-base), 0.4);
+    background-color: hsla(@color-primary-hsl, 0.4);
     a {
       padding: 1rem 1rem 1rem 4rem;
       color: #fff;
       &:hover,
       &:focus {
-        background-color: hsla(var(--color-primary-base), 0.4);
+        background-color: hsla(@color-primary-hsl, 0.4);
       }
       @media (min-width: 992px) {
         padding: 1rem 1rem 1rem 3rem;
@@ -360,7 +360,7 @@ header {
         padding: 0.4rem 1.4rem;
         text-align: center;
         border-radius: 2rem;
-        background-color: hsla(var(--color-primary-base), 0.8);
+        background-color: hsla(@color-primary-hsl, 0.8);
         &:hover,
         &:focus {
           background-color: @color-primary;

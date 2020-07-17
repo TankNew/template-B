@@ -13,7 +13,7 @@
               <div class="logo">
                 <img :src="companyInfo.logo" />
               </div>
-              <div class="company-name">{{ companyInfo.appName }}</div>
+              <div class="company-name">{{ companyInfo.logoText }}</div>
             </div>
             <div v-if="multiLangs" class="lang-bar-mobile">
               <a @click="changeLanguage('zh-CN')" class="lang-switch-btn">中/EN</a>

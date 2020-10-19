@@ -15,7 +15,7 @@
             @click="target(item.id,1)"
           >
             <div class="news-date">
-              <span class="news-day">{{ new Date(item.creationTime).getDay() }}</span>
+              <span class="news-day">{{ new Date(item.creationTime).getDate() }}</span>
               <span
                 class="news-month"
               >{{ new Date(item.creationTime).getFullYear() }}/{{ new Date(item.creationTime).getMonth()+1 }}</span>

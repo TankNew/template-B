@@ -107,11 +107,16 @@ header {
       z-index: 1000;
       > .code {
         position: absolute;
+        width: 100%;
+        height: calc(100% - 4rem);
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         text-align: center;
         white-space: nowrap;
+        img {
+          height: calc(100% - 6rem);
+        }
       }
       .close {
         display: block;

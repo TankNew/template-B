@@ -19,4 +19,5 @@ docker build -t docker.ednet.cn/template-b .
 docker-compose up --build --no-deps -d template-b
 docker-compose up --build --no-deps -d yhxx
 docker-compose up --build --no-deps -d tjhxcw
+docker-compose up --build --no-deps -d tjxdzy
 docker rmi $(docker images -f "dangling=true" -q)

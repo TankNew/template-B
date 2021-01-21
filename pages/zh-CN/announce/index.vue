@@ -1,28 +1,20 @@
 <template>
   <section class="container">
     <h4 class="page-title">
-      <span
-        class="name"
-      >{{ currentPath!==null?currentPath.displayName:currentPathParent.displayName }}</span>
+      <span class="name">{{ currentPath !== null ? currentPath.displayName : currentPathParent.displayName }}</span>
       <span class="more"></span>
     </h4>
     <div class="announce-list-container">
       <div class="page-announce-list">
         <ul>
-          <li
-            v-for="item in pageContent.items"
-            :key="item.id"
-            @click="target(item.id,1)"
-          >
+          <li v-for="item in pageContent.items" :key="item.id" @click="target(item.id, 1)">
             <div class="news-date">
-              <span class="news-day">{{ new Date(item.creationTime).getDate()  }}</span>
-              <span
-                class="news-month"
-              >{{ new Date(item.creationTime).getFullYear() }}/{{ new Date(item.creationTime).getMonth()+1 }}</span>
+              <span class="news-day">{{ new Date(item.creationTime).getDate() }}</span>
+              <span class="news-month">{{ new Date(item.creationTime).getFullYear() }}/{{ new Date(item.creationTime).getMonth() + 1 }}</span>
             </div>
             <div class="news-info">
               <a class="news-title" href="javascript:void(0)">{{ item.title }}</a>
-              <p class="news-intro">{{ filter(item.content,200) }}</p>
+              <p class="news-intro">{{ filter(item.content, 200) }}</p>
             </div>
           </li>
         </ul>

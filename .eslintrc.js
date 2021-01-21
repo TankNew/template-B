@@ -34,10 +34,10 @@ module.exports = {
     'vue/html-indent': 'off',
     'vue/html-self-closing': 'off',
     'vue/max-attributes-per-line': 'off',
+    'vue/html-closing-bracket-newline': 0,
     'vue/no-parsing-error': ['error', { 'x-invalid-end-tag': false }],
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-
     'standard/computed-property-even-spacing': 'off'
   }
 }

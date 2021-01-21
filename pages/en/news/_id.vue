@@ -4,28 +4,27 @@
       <h4 class="page-title wide">
         <span class="name">{{ currentPath.displayName }}</span>
         <span class="more">
-          <a v-if="collapse" @click="collapse=!collapse">
+          <a v-if="collapse" @click="collapse = !collapse">
             {{ $L(`Expand`) }}
             <i class="fas fa-angle-down"></i>
           </a>
-          <a v-else @click="collapse=!collapse">
+          <a v-else @click="collapse = !collapse">
             {{ $L(`Collapse`) }}
             <i class="fas fa-angle-up"></i>
           </a>
         </span>
       </h4>
       <div
-        v-if="currentPath.children&&currentPath.children.length>0"
-        :class="['page-sub-groups',collapse?'':'expand']"
+        v-if="currentPath.children && currentPath.children.length > 0"
+        :class="['page-sub-groups', collapse ? '' : 'expand']"
       >
-        <div @click="collapse=true" class="table">
+        <div @click="collapse = true" class="table">
           <div @click.stop.prevent class="list">
             <dl class="container">
               <dd v-for="child in currentPath.children" :key="child.id">
-                <a
-                  @click.stop.prevent="goNewsGroup(child.catalogGroupId,1)"
-                  href="javascript:void(0)"
-                >{{ child.displayName }}</a>
+                <a @click.stop.prevent="goNewsGroup(child.catalogGroupId, 1)" href="javascript:void(0)">{{
+                  child.displayName
+                }}</a>
               </dd>
             </dl>
           </div>
@@ -34,16 +33,10 @@
     </div>
     <section class="page-news-list-container">
       <div class="page-news-leftbar">
-        <dl
-          v-if="currentPath.children.length>0"
-          class="page-news-leftbar-groups"
-        >
+        <dl v-if="currentPath.children.length > 0" class="page-news-leftbar-groups">
           <dt>{{ currentPath.displayName }}</dt>
           <dd v-for="item in currentPath.children" :key="item.code">
-            <a
-              @click="goNewsGroup(item.catalogGroupId,1)"
-              href="javascript:void(0)"
-            >{{ item.displayName }}</a>
+            <a @click="goNewsGroup(item.catalogGroupId, 1)" href="javascript:void(0)">{{ item.displayName }}</a>
           </dd>
         </dl>
         <dl class="page-news-leftbar-announce">
@@ -69,20 +62,16 @@
       </div>
       <div class="page-news-list">
         <ul>
-          <li
-            v-for="item in pageContent.items"
-            :key="item.id"
-            @click="goNewsDetail(item.id,1)"
-          >
+          <li v-for="item in pageContent.items" :key="item.id" @click="goNewsDetail(item.id, 1)">
             <div class="news-date">
-              <span class="news-day">{{ new Date(item.creationTime).getDate()  }}</span>
-              <span
-                class="news-month"
-              >{{ new Date(item.creationTime).getFullYear() }}/{{ new Date(item.creationTime).getMonth()+1 }}</span>
+              <span class="news-day">{{ new Date(item.creationTime).getDate() }}</span>
+              <span class="news-month"
+                >{{ new Date(item.creationTime).getFullYear() }}/{{ new Date(item.creationTime).getMonth() + 1 }}</span
+              >
             </div>
             <div class="news-info">
               <a class="news-title" href="javascript:void(0)">{{ item.title }}</a>
-              <p class="news-intro">{{ filter(item.content,200) }}</p>
+              <p class="news-intro">{{ filter(item.content, 200) }}</p>
             </div>
           </li>
         </ul>
